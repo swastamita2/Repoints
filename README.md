@@ -1,138 +1,125 @@
-# RePoint - Aplikasi Manajemen Sampah Berbasis Poin
+# 🌱 RePoints - Aplikasi Manajemen Sampah Berbasis Poin
 
 [![Flutter](https://img.shields.io/badge/Flutter-3.9.2-blue.svg)](https://flutter.dev/)
 [![Dart](https://img.shields.io/badge/Dart-3.9.2-blue.svg)](https://dart.dev/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-## 🚀 Quick Start
-
-```bash
-# Clone repository
-git clone <repository-url>
-cd repoint1
-
-# Install dependencies
-flutter pub get
-
-# Run dengan Login/Register
-flutter run lib/main_with_auth.dart
-
-# Atau run langsung ke Home (skip auth)
-flutter run lib/main.dart
-```
-
-📖 **Dokumentasi Lengkap Autentikasi**: [AUTH_GUIDE.md](AUTH_GUIDE.md)
+> **Aplikasi pengelolaan sampah berbasis poin untuk mahasiswa Institut Teknologi PLN**  
+> Mendorong kesadaran lingkungan melalui sistem reward dan gamification
 
 ---
 
-## Deskripsi Aplikasi
+## 📱 Tentang Aplikasi
 
-RePoint adalah aplikasi mobile berbasis Flutter yang dirancang untuk mendorong pengelolaan sampah yang berkelanjutan di lingkungan kampus. Aplikasi ini menggunakan sistem reward berbasis poin untuk memotivasi mahasiswa menyetorkan sampah daur ulang dan belajar tentang kelestarian lingkungan.
+**RePoints** adalah aplikasi mobile inovatif yang mengubah cara mahasiswa berinteraksi dengan pengelolaan sampah. Dengan menggabungkan teknologi Flutter dan konsep gamification, aplikasi ini memberikan insentif nyata bagi mahasiswa untuk aktif dalam menjaga kebersihan lingkungan kampus.
 
-### Konsep Bisnis
+### 🎯 Visi & Misi
 
-Aplikasi ini menerapkan konsep **gamification** dalam pengelolaan sampah, di mana pengguna:
+**Visi:**  
+Menjadi solusi digital terdepan dalam pengelolaan sampah berkelanjutan di lingkungan kampus
 
-- Menyetorkan sampah daur ulang (plastik, kertas, logam, kaca) dan mendapatkan poin berdasarkan berat dan jenis sampah
-- Mengumpulkan poin untuk ditukar dengan reward (voucher, merchandise, workshop)
-- Memonitor kontribusi lingkungan mereka melalui statistik dan target bulanan
-- Mendapatkan edukasi tentang daur ulang dan kelestarian lingkungan
+**Misi:**
 
-### Target Pengguna
+- Meningkatkan kesadaran mahasiswa tentang pentingnya daur ulang
+- Memfasilitasi sistem reward yang adil dan transparan
+- Menciptakan ekosistem kampus yang bersih dan ramah lingkungan
+- Memberikan edukasi berkelanjutan tentang pengelolaan sampah
 
-- **Mahasiswa**: Pengguna utama yang menyetor sampah dan menukar reward
-- **Lingkungan Kampus**: Memfasilitasi pengelolaan sampah yang terorganisir
-- **Komunitas Peduli Lingkungan**: Membangun kesadaran bersama
+### 💡 Konsep Bisnis
+
+RePoints menerapkan model **Circular Economy** dengan sistem poin:
+
+1. **Setor Sampah** → Mahasiswa menyetorkan sampah daur ulang (plastik, kertas, logam, kaca)
+2. **Dapatkan Poin** → Sistem menghitung poin berdasarkan berat dan jenis sampah
+3. **Tukar Reward** → Poin dapat ditukar dengan voucher, merchandise, dan benefit kampus
+4. **Monitor Kontribusi** → Tracking statistik dan dampak lingkungan secara real-time
+5. **Belajar & Berkembang** → Akses edukasi tentang daur ulang dan kelestarian
+
+### 🎓 Target Pengguna
+
+- **Mahasiswa Institut Teknologi PLN**: Pengguna utama yang aktif menyetor sampah
+- **Civitas Akademika**: Dosen dan staff yang mendukung program lingkungan
+- **Pengelola Kampus**: Administrator yang memantau dan mengelola sistem
+- **Komunitas Lingkungan**: Partner dalam kampanye kebersihan kampus
 
 ---
 
-## Fitur Utama Aplikasi
+## ✨ Fitur Utama
 
-### 0. **Autentikasi (Login & Registrasi)**
+### 🔐 1. Autentikasi & Profil User
 
-Sistem autentikasi untuk mengamankan akun pengguna:
+**Login & Registrasi yang Personal**
 
-#### **Halaman Registrasi (Daftar Akun)**
+- Login dengan email institusi
+- Registrasi lengkap dengan data mahasiswa (NIM, Jurusan, Fakultas)
+- Nama user otomatis tampil di Home dan Profile
+- Session management yang aman
+- Logout dengan konfirmasi
 
-- **Logo RePoints**: Branding aplikasi di bagian atas
-- **Form Pendaftaran**:
-  - Nama Pengguna (contoh: Destia Rani)
-  - Email Kampus (format: nama@itpln.ac.id)
-  - Jurusan (dropdown dengan pilihan):
-    - Teknik Informatika
-    - Teknik Elektro
-    - Teknik Sipil
-    - Teknik Mesin
-    - Teknik Lingkungan
-    - Teknik Industri
-    - Sistem Informasi
-    - Arsitektur
-  - Kata Sandi (minimal 8 karakter, dengan toggle visibility)
-  - Konfirmasi Kata Sandi (harus cocok dengan kata sandi)
-  - No. Telepon
-- **Validasi**:
-  - Semua field wajib diisi
-  - Email harus valid (mengandung @)
-  - Password minimal 8 karakter
-  - Konfirmasi password harus sama
-  - Nomor telepon minimal 10 digit
-- **Button**: "Daftar Akun RePoints"
-- **Link**: Navigasi ke halaman login untuk pengguna yang sudah punya akun
+**Profil Dinamis:**
 
-#### **Halaman Login (Masuk ke Akun)**
-
-- **Logo RePoints**: Di bagian atas
-- **Ilustrasi**: Gambar kampus dengan orang-orang dan tempat sampah (plastik, kertas, logam)
-- **Form Login**:
-  - Email Kampus
-  - Kata Sandi (dengan toggle visibility)
-- **Link**: "Lupa Kata Sandi?" untuk reset password
-- **Button**: "Masuk (Login)"
-- **Link**: Navigasi ke halaman registrasi untuk pengguna baru
+- Data lengkap: Nama, Email, No. HP, Jurusan
+- Universitas: Institut Teknologi PLN
+- Avatar dengan inisial otomatis
+- Edit profil dengan validasi
+- Riwayat transaksi lengkap
 
 **Use Case:**
 
-**Flow Registrasi:**
+- User baru melakukan registrasi dengan data lengkap
+- User login menggunakan email dan password
+- Nama user otomatis tampil di seluruh aplikasi
+- Logout menghapus session dan kembali ke halaman login
 
-1. Pengguna membuka aplikasi (belum login)
-2. Pengguna mengisi form registrasi lengkap
-3. Sistem memvalidasi semua input
-4. Jika valid, akun dibuat dan redirect ke login
-5. Pengguna login dengan kredensial baru
+---
 
-**Flow Login:**
+### 🏠 2. Halaman Beranda (Home)
 
-1. Pengguna membuka aplikasi
-2. Pengguna memasukkan email dan password
-3. Sistem memvalidasi kredensial
-4. Jika valid, redirect ke halaman home
-5. Session pengguna tersimpan
+**Dashboard Interaktif & Personal**
 
-**Flow Lupa Password:**
+**Header dengan Sapaan Personal:**
 
-1. Pengguna klik "Lupa Kata Sandi?"
-2. Dialog muncul dengan instruksi kontak admin
-3. Admin melakukan reset password manual
+- Avatar dengan inisial user (A, B, C...)
+- Greeting: "Halo, [Nama Depan]!" (dinamis sesuai user login)
+- Notifikasi bell icon dengan badge
 
-### 1. **Halaman Beranda (Home)**
+**Hero Card - Statistik User:**
 
-Halaman utama yang menampilkan:
+- Total poin terkini dengan desain menarik
+- Progress bar target bulanan (kg sampah)
+- Persentase pencapaian (contoh: 68% dari 15kg)
+- Level/badge user (Pemula, Aktif, Juara, dll)
 
-- **Salam Pengguna**: Menampilkan nama pengguna dan avatar
-- **Hero Card**:
-  - Total poin yang dimiliki
-  - Persentase progres target bulanan (kg sampah)
-  - Level/badge pengguna
-- **Action Buttons**: Akses cepat untuk setor sampah dan tukar reward
-- **Tips Edukasi Carousel**: Banner edukasi tentang daur ulang
-- **Aktivitas Terkini**: Riwayat transaksi terbaru (setor/tukar)
+**Action Squares - Quick Access:**
+
+- 🗑️ **Setor Sampah**: Langsung ke halaman setor
+- 🎁 **Tukar Poin**: Akses katalog reward
+- Design card dengan gradient hijau yang eye-catching
+
+**Tips Edukasi Carousel:**
+
+- Banner scroll horizontal dengan tips daur ulang
+- Artikel pendek tentang manfaat lingkungan
+- Auto-scroll dengan indicator dots
+
+**Aktivitas Terkini:**
+
+- 4 transaksi terakhir (setor sampah & tukar reward)
+- Icon berbeda untuk setor (+) dan tukar (-)
+- Detail: nama item, berat/jumlah, poin, timestamp
+- Button "Lihat Semua" ke halaman History
 
 **Use Case:**
 
-- Pengguna dapat melihat ringkasan aktivitas dan poin
-- Pengguna dapat mengakses fitur utama dengan cepat
-- Pengguna mendapat informasi edukasi lingkungan
+- User login → Langsung lihat saldo poin dan progres
+- Quick access ke fitur utama tanpa navigasi kompleks
+- Monitoring aktivitas real-time
 
-### 2. **Setor Sampah (Deposit Waste)**
+---
+
+### ♻️ 3. Setor Sampah (Deposit Waste)
+
+**Sistem Setoran Fleksibel dengan Kalkulasi Otomatis**
 
 Fitur untuk menyetorkan sampah daur ulang:
 
@@ -157,87 +144,190 @@ Fitur untuk menyetorkan sampah daur ulang:
 - Sistem menghitung poin dan menambahkan ke akun pengguna
 - Riwayat transaksi dicatat
 
-### 3. **Reward/Hadiah**
+### 🎁 4. Tukar Poin (Reward Catalog)
 
-Katalog reward yang dapat ditukar dengan poin:
+**Katalog Reward Menarik dengan Gambar Produk Asli**
 
-- **Tampilan Grid**: Menampilkan semua reward dalam bentuk kartu
-- **Item Reward**:
-  - Voucher Kopi (450 poin)
-  - Paket Alat Tulis (320 poin)
-  - Tumbler RePoint (520 poin)
-  - Workshop Compost (280 poin)
-  - Tote Bag Kampus (250 poin)
-  - Diskon Kantin (500 poin)
-- **Proses Penukaran**:
-  1. Pengguna memilih reward
-  2. Sistem validasi poin mencukupi
-  3. Konfirmasi penukaran
-  4. Poin dikurangi
-  5. Tampilan success dengan instruksi pengambilan
-- **Halaman Success**: Menampilkan detail reward yang ditukar dan cara pengambilan
+**Tampilan Hero Card:**
 
-**Use Case:**
+- Icon piala besar
+- Total poin user saat ini
+- Gradient hijau menarik
 
-- Pengguna menelusuri katalog reward
-- Pengguna memilih reward yang diinginkan
-- Sistem cek kecukupan poin
-- Pengguna konfirmasi penukaran
-- Sistem mengurangi poin dan mencatat transaksi
-- Pengguna mendapat instruksi pengambilan reward
+**Grid Katalog (2 Kolom):**
+Menampilkan 6 produk reward dengan gambar asli:
 
-### 4. **Edukasi Lingkungan**
+1. **Voucher Kopi Kampus** - 450 poin
 
-Platform pembelajaran tentang pengelolaan sampah:
+   - Gambar: Cup kopi kampus
+   - Deskripsi: Satu cup kopi dari kedai kampus
 
-- **Kategori Artikel**:
-  - Daur Ulang
-  - Lingkungan
-  - Tips & Trik
-  - Inovasi
-  - Komunitas
-- **Fitur Artikel**:
-  - Judul dan deskripsi singkat
-  - Waktu baca (estimasi menit)
-  - Tanggal publikasi
-  - Tag/label konten
-  - Status favorit dan sudah dibaca
-  - Ikon kategori dengan kode warna
-- **Filter & Search**: Pencarian artikel berdasarkan kategori atau keyword
-- **Detail Artikel**: Konten lengkap artikel dengan gambar pendukung
-- **Tracking**: Sistem mencatat artikel yang sudah dibaca
+2. **Tumbler Eksklusif** - 520 poin
 
-**Use Case:**
+   - Gambar: Tumbler stainless premium
+   - Deskripsi: Tumbler stainless untuk air minum
 
-- Pengguna membuka halaman edukasi
-- Pengguna memilih kategori atau mencari artikel
-- Pengguna membaca artikel lengkap
-- Sistem menandai artikel sebagai "sudah dibaca"
-- Pengguna dapat menambahkan artikel ke favorit
+3. **ToteBag RePoints** - 380 poin
 
-### 5. **Riwayat Transaksi (History)**
+   - Gambar: Tas belanja kanvas
+   - Deskripsi: Tas belanja ramah lingkungan
 
-Catatan lengkap semua aktivitas pengguna:
+4. **Voucher Minimarket Gorong** - 600 poin
 
-- **Tipe Transaksi**:
-  - **Gain (Hijau)**: Setoran sampah dengan detail berat dan poin yang didapat
-  - **Loss (Oranye)**: Penukaran reward dengan detail item
-- **Informasi Transaksi**:
-  - Judul/nama transaksi
-  - Detail spesifik (berat, item reward)
-  - Timestamp (hari ini, kemarin, X hari lalu)
-  - Delta poin (+/-)
-- **Sorting**: Urut dari transaksi terbaru
-- **Filter**: Dapat difilter berdasarkan tipe (gain/loss)
+   - Gambar: Gift card minimarket
+   - Deskripsi: Voucher belanja Rp 50.000
+
+5. **Voucher Print Gorong** - 300 poin
+
+   - Gambar: Printer dan dokumen
+   - Deskripsi: Gratis print 100 lembar
+
+6. **Kaos RePoints** - 750 poin
+   - Gambar: T-shirt hijau branded
+   - Deskripsi: Kaos eksklusif RePoints
+
+**Fitur Kartu Produk:**
+
+- Gambar produk HD dari `asset/Katalog_reward/`
+- Badge poin dengan warna berbeda
+- Icon kategori (coffee, water_drop, shopping_bag, store, print, checkroom)
+- Status "Poin Cukup" atau "Poin Kurang"
+
+**Halaman Detail & Konfirmasi:**
+
+- Gambar produk besar (200x200)
+- Nama dan deskripsi lengkap
+- Total poin yang dibutuhkan
+- Saldo poin user saat ini
+- Button "Tukar Sekarang" (disabled jika poin kurang)
+- Konfirmasi dialog sebelum redeem
+
+**Success Page:**
+
+- Animasi success dengan gambar berhasil
+- Detail reward yang ditukar
+- Instruksi pengambilan:
+  - "Tunjukkan halaman ini ke petugas"
+  - Kode redeem unik
+  - Lokasi pengambilan
+  - Waktu berlaku
+- Button "Kembali ke Katalog"
 
 **Use Case:**
 
-- Pengguna membuka halaman history
-- Sistem menampilkan semua transaksi terurut
-- Pengguna melihat detail setiap transaksi
-- Pengguna dapat menganalisis pola aktivitas mereka
+- User browse katalog → Pilih reward → Cek poin cukup → Konfirmasi → Success + instruksi pengambilan
 
-### 6. **Profile Pengguna**
+---
+
+### 📚 5. Edukasi Lingkungan
+
+**Platform Pembelajaran tentang Daur Ulang & Lingkungan**
+
+**Tab Navigation (3 Kategori Utama):**
+
+- 📖 Artikel
+- 🎬 Video Tutorial
+- 💡 Tips & Trik
+
+**Search Bar:**
+
+- Pencarian real-time berdasarkan judul dan keyword
+- Icon search dengan placeholder
+
+**Filter Chips:**
+
+- 🔖 Favorit Only
+- ♻️ Daur Ulang
+- 🌍 Lingkungan
+- 💡 Tips & Trik
+- 🚀 Inovasi
+- 👥 Komunitas
+
+**Card Artikel (List View):**
+
+- Thumbnail gambar artikel
+- Icon kategori dengan warna berbeda
+- Judul artikel (bold)
+- Deskripsi singkat (2-3 baris)
+- Metadata:
+  - 📅 Tanggal publish
+  - ⏱️ Waktu baca (5 min, 10 min)
+  - 🏷️ Tags/label
+- Status indicator:
+  - ✓ Sudah dibaca (badge hijau)
+  - ❤️ Favorit (icon merah)
+
+**Detail Artikel:**
+
+- Cover image full width
+- Judul besar dan jelas
+- Author & tanggal
+- Konten lengkap dengan formatting
+- Related articles di bawah
+- Button favorit & share
+
+**Tracking & Engagement:**
+
+- Auto-mark "sudah dibaca" saat scroll ke bawah
+- Counter total artikel dibaca
+- Bookmark untuk baca nanti
+- Riwayat artikel yang pernah dibuka
+
+**Use Case:**
+
+- User browse artikel → Filter kategori → Klik artikel → Baca lengkap → Auto mark "sudah dibaca" → Bookmark favorit
+
+---
+
+### 📜 6. Riwayat Transaksi (History)
+
+**Timeline Lengkap Semua Aktivitas User**
+
+**List View Chronological:**
+Urut dari transaksi terbaru ke terlama
+
+**Tipe Transaksi:**
+
+1. **Setor Sampah (+Poin) - Icon Hijau**
+
+   - Judul: "Setor [Jenis Sampah]"
+   - Detail: "[Berat] kg • [Poin] poin"
+   - Timestamp: "Hari ini, 08:40" / "Kemarin, 17:05" / "3 Hari lalu"
+   - Warna hijau: #4CAF50
+
+2. **Tukar Reward (-Poin) - Icon Oranye**
+   - Judul: "Tukar [Nama Reward]"
+   - Detail: "[Nama Item]"
+   - Timestamp dengan format sama
+   - Warna oranye: #FF9800
+
+**Informasi Setiap Entry:**
+
+- Icon circle dengan tipe (+ atau -)
+- Judul transaksi (bold)
+- Detail spesifik
+- Timestamp relatif (hari ini, kemarin, X hari lalu)
+- Delta poin dengan tanda + atau -
+
+**Filter & Sort (Future):**
+
+- Filter by type (setor only / tukar only / semua)
+- Filter by date range
+- Search transaksi
+
+**Bottom Padding:**
+
+- Extra space 70px untuk menghindari tertutup bottom navigation
+
+**Use Case:**
+
+- User buka History → Lihat semua transaksi → Analisa pola aktivitas → Track total kontribusi
+
+---
+
+### 👤 7. Profile Pengguna
+
+**Manajemen Data Personal & Statistik**
 
 Manajemen data dan informasi pengguna:
 
