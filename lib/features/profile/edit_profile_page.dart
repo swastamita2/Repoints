@@ -17,9 +17,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
   late TextEditingController _emailController;
   late TextEditingController _phoneController;
   late TextEditingController _universityController;
-  late TextEditingController _facultyController;
-  late TextEditingController _majorController;
-  late TextEditingController _nimController;
+  late TextEditingController _departmentController;
+  late TextEditingController _identityController;
 
   final _formKey = GlobalKey<FormState>();
 
@@ -30,9 +29,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
     _emailController = TextEditingController(text: widget.user.email);
     _phoneController = TextEditingController(text: widget.user.phone);
     _universityController = TextEditingController(text: widget.user.university);
-    _facultyController = TextEditingController(text: widget.user.faculty);
-    _majorController = TextEditingController(text: widget.user.major);
-    _nimController = TextEditingController(text: widget.user.nim);
+    _departmentController = TextEditingController(text: widget.user.department);
+    _identityController = TextEditingController(
+      text: widget.user.identityNumber,
+    );
   }
 
   @override
@@ -41,9 +41,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
     _emailController.dispose();
     _phoneController.dispose();
     _universityController.dispose();
-    _facultyController.dispose();
-    _majorController.dispose();
-    _nimController.dispose();
+    _departmentController.dispose();
+    _identityController.dispose();
     super.dispose();
   }
 
@@ -54,9 +53,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
         email: _emailController.text,
         phone: _phoneController.text,
         university: _universityController.text,
-        faculty: _facultyController.text,
-        major: _majorController.text,
-        nim: _nimController.text,
+        department: _departmentController.text,
+        identityNumber: _identityController.text,
       );
       Navigator.pop(context, updatedUser);
     }
@@ -179,27 +177,20 @@ class _EditProfilePageState extends State<EditProfilePage> {
             ),
             const SizedBox(height: 16),
 
-            // Faculty Field
+            // Department Field (Jurusan/Fakultas/Unit Kerja)
             _buildTextField(
-              controller: _facultyController,
-              label: 'Fakultas',
+              controller: _departmentController,
+              label: widget.user.departmentLabel,
               icon: Icons.business,
             ),
             const SizedBox(height: 16),
 
-            // Major Field
+            // Identity Number (NIM/NIP)
             _buildTextField(
-              controller: _majorController,
-              label: 'Jurusan',
-              icon: Icons.menu_book,
-            ),
-            const SizedBox(height: 16),
-
-            // NIM Field
-            _buildTextField(
-              controller: _nimController,
-              label: 'NIM',
+              controller: _identityController,
+              label: widget.user.identityLabel,
               icon: Icons.badge,
+              enabled: false, // Read-only
             ),
             const SizedBox(height: 32),
 
@@ -238,11 +229,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
     required IconData icon,
     TextInputType? keyboardType,
     String? Function(String?)? validator,
+    bool enabled = true,
   }) {
     return TextFormField(
       controller: controller,
       keyboardType: keyboardType,
       validator: validator,
+      enabled: enabled,
       decoration: InputDecoration(
         labelText: label,
         prefixIcon: Icon(icon, color: RePointApp.primaryGreen),

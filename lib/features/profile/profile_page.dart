@@ -147,7 +147,7 @@ class ProfilePage extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  user.faculty,
+                  '${user.userRole} • ${user.department}',
                   style: TextStyle(color: Colors.grey[500], fontSize: 12),
                 ),
               ],
@@ -439,12 +439,28 @@ class ProfilePage extends StatelessWidget {
               ),
               _buildDivider(),
               _buildInfoTile(
-                icon: Icons.school,
-                title: 'Program Studi',
-                value: user.major,
+                icon: Icons.account_balance,
+                title: 'Universitas',
+                value: user.university,
               ),
               _buildDivider(),
-              _buildInfoTile(icon: Icons.badge, title: 'NIM', value: user.nim),
+              _buildInfoTile(
+                icon: Icons.work,
+                title: 'Status',
+                value: user.userRole,
+              ),
+              _buildDivider(),
+              _buildInfoTile(
+                icon: Icons.school,
+                title: user.departmentLabel,
+                value: user.department,
+              ),
+              _buildDivider(),
+              _buildInfoTile(
+                icon: Icons.badge,
+                title: user.identityLabel,
+                value: user.identityNumber,
+              ),
               _buildDivider(),
               _buildInfoTile(
                 icon: Icons.calendar_today,

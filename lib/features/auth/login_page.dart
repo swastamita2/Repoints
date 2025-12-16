@@ -37,6 +37,22 @@ class _LoginPageState extends State<LoginPage> {
           )
           .join(' ');
 
+      // Determine role based on email domain (simple logic for demo)
+      String role = 'Mahasiswa';
+      String department = 'Teknik Informatika';
+      String identityNumber =
+          '2106${DateTime.now().millisecondsSinceEpoch % 1000000}';
+
+      if (email.contains('lecturer') || email.contains('dosen')) {
+        role = 'Dosen';
+        department = 'Fakultas Teknik';
+        identityNumber = '198901012020121001';
+      } else if (email.contains('staff') || email.contains('tendik')) {
+        role = 'Tendik/Staff';
+        department = 'Akademik';
+        identityNumber = '199001012020121001';
+      }
+
       // Navigate to main app with user data
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
@@ -44,7 +60,9 @@ class _LoginPageState extends State<LoginPage> {
             userName: capitalizedName,
             userEmail: email,
             userPhone: '081234567890', // Default phone
-            userMajor: 'Teknik Informatika', // Default major
+            userRole: role,
+            identityNumber: identityNumber,
+            department: department,
           ),
         ),
       );

@@ -28,7 +28,9 @@ class RePointApp extends StatelessWidget {
         userName: 'Demo User',
         userEmail: 'demo@example.com',
         userPhone: '081234567890',
-        userMajor: 'Teknik Informatika',
+        userRole: 'Mahasiswa',
+        identityNumber: '2106123456',
+        department: 'Teknik Informatika',
       ),
     );
   }

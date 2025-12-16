@@ -18,14 +18,18 @@ class RePointShell extends StatefulWidget {
   final String userName;
   final String userEmail;
   final String userPhone;
-  final String userMajor;
+  final String userRole;
+  final String identityNumber;
+  final String department;
 
   const RePointShell({
     super.key,
     required this.userName,
     required this.userEmail,
     required this.userPhone,
-    required this.userMajor,
+    required this.userRole,
+    required this.identityNumber,
+    required this.department,
   });
 
   @override
@@ -58,9 +62,9 @@ class _RePointShellState extends State<RePointShell> {
       email: widget.userEmail,
       phone: widget.userPhone,
       university: 'Institut Teknologi PLN',
-      faculty: 'Fakultas Teknik',
-      major: widget.userMajor,
-      nim: '2106${DateTime.now().millisecondsSinceEpoch % 1000000}',
+      userRole: widget.userRole,
+      identityNumber: widget.identityNumber,
+      department: widget.department,
       joinDate: DateTime.now(),
     );
   }

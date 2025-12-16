@@ -15,31 +15,51 @@ class _RegistrationPageState extends State<RegistrationPage> {
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
-  final _majorController = TextEditingController();
+  final _identityController = TextEditingController();
+  final _departmentController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
   final _phoneController = TextEditingController();
 
   bool _obscurePassword = true;
   bool _obscureConfirmPassword = true;
-  String? _selectedMajor;
+  String? _selectedRole;
+  String? _selectedDepartment;
 
-  final List<String> _majors = [
-    'Teknik Informatika',
-    'Teknik Elektro',
-    'Teknik Sipil',
-    'Teknik Mesin',
-    'Teknik Lingkungan',
-    'Teknik Industri',
-    'Sistem Informasi',
-    'Arsitektur',
-  ];
+  final List<String> _roles = ['Mahasiswa', 'Dosen', 'Tendik/Staff'];
+
+  final Map<String, List<String>> _departments = {
+    'Mahasiswa': [
+      'Teknik Informatika',
+      'Teknik Elektro',
+      'Teknik Sipil',
+      'Teknik Mesin',
+      'Teknik Lingkungan',
+      'Teknik Industri',
+      'Sistem Informasi',
+      'Arsitektur',
+    ],
+    'Dosen': [
+      'Fakultas Teknik',
+      'Fakultas Ekonomi dan Bisnis',
+      'Fakultas Ilmu Sosial dan Politik',
+    ],
+    'Tendik/Staff': [
+      'Akademik',
+      'Keuangan',
+      'IT & Sistem Informasi',
+      'Umum & Fasilitas',
+      'Kemahasiswaan',
+      'Perpustakaan',
+    ],
+  };
 
   @override
   void dispose() {
     _nameController.dispose();
     _emailController.dispose();
-    _majorController.dispose();
+    _identityController.dispose();
+    _departmentController.dispose();
     _passwordController.dispose();
     _confirmPasswordController.dispose();
     _phoneController.dispose();
@@ -52,7 +72,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
       final name = _nameController.text.trim();
       final email = _emailController.text.trim();
       final phone = _phoneController.text.trim();
-      final major = _selectedMajor ?? 'Teknik Informatika';
+      final role = _selectedRole ?? 'Mahasiswa';
+      final identityNumber = _identityController.text.trim();
+      final department = _selectedDepartment ?? _departments[role]!.first;
 
       // Navigate directly to main app with user data
       Navigator.of(context).pushReplacement(
@@ -61,7 +83,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
             userName: name,
             userEmail: email,
             userPhone: phone,
-            userMajor: major,
+            userRole: role,
+            identityNumber: identityNumber,
+            department: department,
           ),
         ),
       );
@@ -143,7 +167,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             },
                           ),
                           const SizedBox(height: 16),
-                          // Jurusan (Dropdown)
+                          // Role/Tipe User (Dropdown)
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -157,49 +181,124 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                   ),
                                 ),
                                 child: DropdownButtonFormField<String>(
-                                  initialValue: _selectedMajor,
+                                  initialValue: _selectedRole,
                                   decoration: const InputDecoration(
-                                    labelText: 'Jurusan',
+                                    labelText: 'Tipe Pengguna',
                                     border: InputBorder.none,
                                     contentPadding: EdgeInsets.symmetric(
                                       horizontal: 16,
                                       vertical: 16,
                                     ),
                                   ),
-                                  hint: const Text('Pilih Jurusan'),
-                                  items: _majors.map((String major) {
+                                  hint: const Text('Pilih Tipe Pengguna'),
+                                  items: _roles.map((String role) {
                                     return DropdownMenuItem<String>(
-                                      value: major,
-                                      child: Text(major),
+                                      value: role,
+                                      child: Text(role),
                                     );
                                   }).toList(),
                                   onChanged: (String? newValue) {
                                     setState(() {
-                                      _selectedMajor = newValue;
+                                      _selectedRole = newValue;
+                                      _selectedDepartment =
+                                          null; // Reset department
                                     });
                                   },
                                   validator: (value) {
                                     if (value == null) {
-                                      return 'Pilih jurusan terlebih dahulu';
+                                      return 'Pilih tipe pengguna';
                                     }
                                     return null;
                                   },
                                 ),
                               ),
-                              const SizedBox(height: 6),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 4),
-                                child: Text(
-                                  '* Pilih Salah Satu',
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: Colors.grey.shade600,
-                                  ),
-                                ),
-                              ),
                             ],
                           ),
                           const SizedBox(height: 16),
+                          // NIM/NIP (Conditional)
+                          _buildTextField(
+                            controller: _identityController,
+                            label: _selectedRole == 'Mahasiswa' ? 'NIM' : 'NIP',
+                            hint: _selectedRole == 'Mahasiswa'
+                                ? '2106123456'
+                                : '198901012020121001',
+                            keyboardType: TextInputType.number,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return '${_selectedRole == 'Mahasiswa' ? 'NIM' : 'NIP'} tidak boleh kosong';
+                              }
+                              if (_selectedRole == 'Mahasiswa' &&
+                                  value.length < 8) {
+                                return 'NIM minimal 8 digit';
+                              }
+                              return null;
+                            },
+                          ),
+                          const SizedBox(height: 16),
+                          // Department (Conditional based on role)
+                          if (_selectedRole != null)
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(12),
+                                    border: Border.all(
+                                      color: Colors.grey.shade300,
+                                      width: 1.5,
+                                    ),
+                                  ),
+                                  child: DropdownButtonFormField<String>(
+                                    value: _selectedDepartment,
+                                    decoration: InputDecoration(
+                                      labelText: _selectedRole == 'Mahasiswa'
+                                          ? 'Jurusan'
+                                          : _selectedRole == 'Dosen'
+                                          ? 'Fakultas'
+                                          : 'Unit Kerja',
+                                      border: InputBorder.none,
+                                      contentPadding:
+                                          const EdgeInsets.symmetric(
+                                            horizontal: 16,
+                                            vertical: 16,
+                                          ),
+                                    ),
+                                    hint: Text(
+                                      'Pilih ${_selectedRole == 'Mahasiswa'
+                                          ? 'Jurusan'
+                                          : _selectedRole == 'Dosen'
+                                          ? 'Fakultas'
+                                          : 'Unit Kerja'}',
+                                    ),
+                                    items: _departments[_selectedRole]!.map((
+                                      String dept,
+                                    ) {
+                                      return DropdownMenuItem<String>(
+                                        value: dept,
+                                        child: Text(dept),
+                                      );
+                                    }).toList(),
+                                    onChanged: (String? newValue) {
+                                      setState(() {
+                                        _selectedDepartment = newValue;
+                                      });
+                                    },
+                                    validator: (value) {
+                                      if (value == null) {
+                                        return 'Pilih ${_selectedRole == 'Mahasiswa'
+                                            ? 'jurusan'
+                                            : _selectedRole == 'Dosen'
+                                            ? 'fakultas'
+                                            : 'unit kerja'}';
+                                      }
+                                      return null;
+                                    },
+                                  ),
+                                ),
+                                const SizedBox(height: 16),
+                              ],
+                            ),
                           // Kata Sandi
                           _buildPasswordField(
                             controller: _passwordController,
