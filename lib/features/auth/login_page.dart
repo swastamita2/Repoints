@@ -236,7 +236,7 @@ class _LoginPageState extends State<LoginPage> {
                               elevation: 0,
                             ),
                             child: const Text(
-                              'Masuk (Login)',
+                              'Masuk',
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,

@@ -315,30 +315,39 @@ class ProfilePage extends StatelessWidget {
   }
 
   Widget _buildAchievements() {
+    // Achievements berdasarkan level yang sama dengan dashboard
     final achievements = [
       {
         'icon': Icons.military_tech,
-        'title': 'Pemula',
-        'achieved': true,
+        'title': 'Eco Rookie',
+        'subtitle': '< 2500 poin',
+        'achieved': userPoints >= 0,
         'color': const Color(0xFFFFB74D),
+        'level': 'Eco Rookie',
       },
       {
         'icon': Icons.volunteer_activism,
-        'title': 'Peduli',
-        'achieved': true,
+        'title': 'Green Warrior',
+        'subtitle': '≥ 2500 poin',
+        'achieved': userPoints >= 2500,
         'color': const Color(0xFF4CAF50),
+        'level': 'Green Warrior',
       },
       {
         'icon': Icons.public,
-        'title': 'Eco Hero',
-        'achieved': totalTransactions >= 10,
+        'title': 'Planet Guardian',
+        'subtitle': '≥ 4000 poin',
+        'achieved': userPoints >= 4000,
         'color': const Color(0xFF2196F3),
+        'level': 'Planet Guardian',
       },
       {
         'icon': Icons.star,
         'title': 'Champion',
-        'achieved': false,
+        'subtitle': '≥ 6000 poin',
+        'achieved': userPoints >= 6000,
         'color': const Color(0xFF9C27B0),
+        'level': 'Champion',
       },
     ];
 
@@ -363,41 +372,79 @@ class ProfilePage extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: achievements.map((achievement) {
-              return Column(
-                children: [
-                  Container(
-                    width: 56,
-                    height: 56,
-                    decoration: BoxDecoration(
-                      color: achievement['achieved'] as bool
-                          ? (achievement['color'] as Color).withValues(
-                              alpha: 0.1,
-                            )
-                          : Colors.grey[200],
-                      shape: BoxShape.circle,
+              final isAchieved = achievement['achieved'] as bool;
+              final isCurrent = levelLabel == achievement['level'];
+
+              return Tooltip(
+                message: '${achievement['title']}: ${achievement['subtitle']}',
+                child: Column(
+                  children: [
+                    Container(
+                      width: 64,
+                      height: 64,
+                      decoration: BoxDecoration(
+                        color: isAchieved
+                            ? (achievement['color'] as Color).withValues(
+                                alpha: 0.15,
+                              )
+                            : Colors.grey[200],
+                        shape: BoxShape.circle,
+                        border: isCurrent
+                            ? Border.all(
+                                color: achievement['color'] as Color,
+                                width: 3,
+                              )
+                            : null,
+                      ),
+                      child: Icon(
+                        achievement['icon'] as IconData,
+                        color: isAchieved
+                            ? achievement['color'] as Color
+                            : Colors.grey[400],
+                        size: 32,
+                      ),
                     ),
-                    child: Icon(
-                      achievement['icon'] as IconData,
-                      color: achievement['achieved'] as bool
-                          ? achievement['color'] as Color
-                          : Colors.grey[400],
-                      size: 28,
+                    const SizedBox(height: 8),
+                    SizedBox(
+                      width: 70,
+                      child: Text(
+                        achievement['title'] as String,
+                        textAlign: TextAlign.center,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontSize: 11,
+                          color: isAchieved ? Colors.black87 : Colors.grey[400],
+                          fontWeight: isCurrent
+                              ? FontWeight.bold
+                              : (isAchieved
+                                    ? FontWeight.w600
+                                    : FontWeight.normal),
+                        ),
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    achievement['title'] as String,
-                    style: TextStyle(
-                      fontSize: 11,
-                      color: achievement['achieved'] as bool
-                          ? Colors.black87
-                          : Colors.grey[400],
-                      fontWeight: achievement['achieved'] as bool
-                          ? FontWeight.w600
-                          : FontWeight.normal,
-                    ),
-                  ),
-                ],
+                    if (isCurrent)
+                      Container(
+                        margin: const EdgeInsets.only(top: 4),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 6,
+                          vertical: 2,
+                        ),
+                        decoration: BoxDecoration(
+                          color: achievement['color'] as Color,
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: const Text(
+                          'Aktif',
+                          style: TextStyle(
+                            fontSize: 9,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                  ],
+                ),
               );
             }).toList(),
           ),

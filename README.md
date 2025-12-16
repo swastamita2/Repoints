@@ -37,10 +37,19 @@ RePoints menerapkan model **Circular Economy** dengan sistem poin:
 
 ### 🎓 Target Pengguna
 
-- **Mahasiswa Institut Teknologi PLN**: Pengguna utama yang aktif menyetor sampah
-- **Civitas Akademika**: Dosen dan staff yang mendukung program lingkungan
-- **Pengelola Kampus**: Administrator yang memantau dan mengelola sistem
-- **Komunitas Lingkungan**: Partner dalam kampanye kebersihan kampus
+**Seluruh Civitas Akademika Institut Teknologi PLN:**
+
+- **Mahasiswa**: Pengguna utama yang aktif menyetor sampah (identitas: NIM)
+- **Dosen**: Staff pengajar yang mendukung program lingkungan (identitas: NIP)
+- **Tendik/Staff**: Tenaga kependidikan dan staff administrasi (identitas: NIP)
+
+**Fakultas yang Didukung:**
+
+- Fakultas Teknik Elektro
+- Fakultas Teknik Mesin
+- Fakultas Teknik Sipil dan Perencanaan
+- Fakultas Ekonomi dan Bisnis
+- Fakultas Ketenagalistrikan dan Energi Terbarukan
 
 ---
 
@@ -88,7 +97,7 @@ RePoints menerapkan model **Circular Economy** dengan sistem poin:
 - Total poin terkini dengan desain menarik
 - Progress bar target bulanan (kg sampah)
 - Persentase pencapaian (contoh: 68% dari 15kg)
-- Level/badge user (Pemula, Aktif, Juara, dll)
+- Level user (Eco Rookie, Green Warrior, Planet Guardian, Champion)
 
 **Action Squares - Quick Access:**
 
@@ -529,12 +538,14 @@ Rate per jenis:
 
 ### Sistem Level/Badge
 
-Berdasarkan total kg sampah:
+Berdasarkan total poin yang dikumpulkan:
 
-- **Pemula**: 0-10 kg
-- **Aktif**: 10-30 kg
-- **Konsisten**: 30-50 kg
-- **Champion**: > 50 kg
+- **Eco Rookie**: 0-2,499 poin (Gold badge 🥉)
+- **Green Warrior**: 2,500-3,999 poin (Green badge 💚)
+- **Planet Guardian**: 4,000-5,999 poin (Blue badge 🌍)
+- **Champion**: 6,000+ poin (Purple badge ⭐)
+
+_Level otomatis update di Dashboard dan Achievement badge di Profile_
 
 ### Target Bulanan
 

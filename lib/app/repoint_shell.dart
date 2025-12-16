@@ -10,6 +10,7 @@ import '../features/reward/reward_success_page.dart';
 import '../features/setor/setor_sampah_page.dart';
 import '../models/edukasi_item.dart';
 import '../models/history_entry.dart';
+import '../models/notification_item.dart';
 import '../models/reward_item.dart';
 import '../models/user_profile.dart';
 import 'repoint_app.dart';
@@ -47,10 +48,11 @@ class _RePointShellState extends State<RePointShell> {
   // User Profile
   late UserProfile _userProfile;
 
-  int _userPoints = 2495;
+  int _userPoints = 1500; // Demo: Eco Rookie tier (0-2499)
   double _monthlyKg = 10.2;
   final double _targetKg = 15.0;
   int _selectedIndex = 0;
+  final List<NotificationItem> _notifications = [];
 
   @override
   void initState() {
@@ -544,6 +546,7 @@ Mulai sekarang, mari biasakan memisahkan sampah dengan benar!
   ];
 
   String get _levelLabel {
+    if (_userPoints >= 6000) return 'Champion';
     if (_userPoints >= 4000) return 'Planet Guardian';
     if (_userPoints >= 2500) return 'Green Warrior';
     return 'Eco Rookie';
@@ -565,6 +568,14 @@ Mulai sekarang, mari biasakan memisahkan sampah dengan benar!
         _monthlyKg += berat;
         _history = [entry, ..._history];
       });
+
+      // Add notification
+      _addNotification(
+        title: 'Setoran Diterima ✓',
+        subtitle: '${berat.toStringAsFixed(1)} kg $jenis • +$earned poin',
+        type: NotificationType.deposit,
+      );
+
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -651,6 +662,13 @@ Mulai sekarang, mari biasakan memisahkan sampah dengan benar!
       _history = [entry, ..._history];
     });
 
+    // Add notification
+    _addNotification(
+      title: 'Penukaran Berhasil 🎁',
+      subtitle: reward.title,
+      type: NotificationType.redemption,
+    );
+
     if (!mounted) return;
     // Navigate to success page
     await Navigator.of(context).push(
@@ -668,6 +686,31 @@ Mulai sekarang, mari biasakan memisahkan sampah dengan benar!
       length,
       (index) => chars[(random + index) % chars.length],
     ).join();
+  }
+
+  void _addNotification({
+    required String title,
+    required String subtitle,
+    required NotificationType type,
+  }) {
+    setState(() {
+      _notifications.insert(
+        0,
+        NotificationItem(
+          id: 'notif-${DateTime.now().millisecondsSinceEpoch}',
+          title: title,
+          subtitle: subtitle,
+          date: DateTime.now(),
+          type: type,
+        ),
+      );
+    });
+  }
+
+  void _deleteNotification(int index) {
+    setState(() {
+      _notifications.removeAt(index);
+    });
   }
 
   void _onProfileUpdated(UserProfile updatedProfile) {
@@ -689,8 +732,10 @@ Mulai sekarang, mari biasakan memisahkan sampah dengan benar!
           levelLabel: _levelLabel,
           history: _history,
           edukasiItems: _edukasiItems,
+          notifications: _notifications,
           onSetorTap: _openSetorPage,
           onRewardTap: _openRewardPage,
+          onDeleteNotification: _deleteNotification,
         ),
         EducationPage(
           key: const PageStorageKey('education_page'),

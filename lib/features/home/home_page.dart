@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../models/edukasi_item.dart';
 import '../../models/history_entry.dart';
+import '../../models/notification_item.dart';
 import '../../widgets/action_square.dart';
 import '../../widgets/history_tile.dart';
 import '../notification/notification_page.dart';
@@ -14,8 +15,10 @@ class HomePage extends StatelessWidget {
   final String levelLabel;
   final List<HistoryEntry> history;
   final List<EdukasiItem> edukasiItems;
+  final List<NotificationItem> notifications;
   final VoidCallback onSetorTap;
   final VoidCallback onRewardTap;
+  final Function(int) onDeleteNotification;
 
   const HomePage({
     super.key,
@@ -26,8 +29,10 @@ class HomePage extends StatelessWidget {
     required this.levelLabel,
     required this.history,
     required this.edukasiItems,
+    required this.notifications,
     required this.onSetorTap,
     required this.onRewardTap,
+    required this.onDeleteNotification,
   });
 
   @override
@@ -121,7 +126,10 @@ class HomePage extends StatelessWidget {
             onPressed: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => const NotificationPage(),
+                  builder: (context) => NotificationPage(
+                    notifications: notifications,
+                    onDelete: onDeleteNotification,
+                  ),
                 ),
               );
             },

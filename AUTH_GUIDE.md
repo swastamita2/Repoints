@@ -88,18 +88,47 @@ flutter run lib/main.dart
 - Button "Daftar Akun RePoints"
 - Link navigasi ke Login Page
 
-### Pilihan Jurusan
+### Multi-Role Registration System
 
-```dart
-- Teknik Informatika
-- Teknik Elektro
-- Teknik Sipil
-- Teknik Mesin
-- Teknik Lingkungan
-- Teknik Industri
-- Sistem Informasi
-- Arsitektur
-```
+**Role Options:**
+
+- **Mahasiswa** (NIM sebagai identitas)
+- **Dosen** (NIP sebagai identitas)
+- **Tendik/Staff** (NIP sebagai identitas)
+
+**Fakultas (untuk Mahasiswa):**
+
+1. **Fakultas Teknik Elektro**
+
+   - S1 Teknik Elektro
+   - S1 Teknik Telekomunikasi
+
+2. **Fakultas Teknik Mesin**
+
+   - S1 Teknik Mesin
+
+3. **Fakultas Teknik Sipil dan Perencanaan**
+
+   - S1 Teknik Sipil
+   - S1 Arsitektur
+
+4. **Fakultas Ekonomi dan Bisnis**
+
+   - S1 Teknik Industri
+   - S1 Akuntansi
+
+5. **Fakultas Ketenagalistrikan dan Energi Terbarukan**
+   - S1 Teknik Informatika
+   - S1 Sistem Informasi
+
+**Unit Kerja (untuk Tendik/Staff):**
+
+- Administrasi Akademik
+- Keuangan
+- Perpustakaan
+- Teknologi Informasi
+- Kemahasiswaan
+- Umum dan Perlengkapan
 
 ### Validasi
 
@@ -354,3 +383,27 @@ Untuk pertanyaan atau issue terkait autentikasi:
 
 - File issue di repository
 - Contact: [Team Email]
+
+
+##  Features Terbaru
+
+### 1. Multi-Role Support (v2.0)
+-  Support untuk Mahasiswa, Dosen, dan Tendik/Staff
+-  Identitas berbeda: NIM untuk mahasiswa, NIP untuk dosen/staff
+-  Hierarchical selection: Role  Fakultas  Jurusan
+-  Unit Kerja selection untuk Tendik/Staff
+
+### 2. Consistent Level System
+-  4-tier: Eco Rookie, Green Warrior, Planet Guardian, Champion
+-  Level names konsisten di Dashboard dan Achievement
+-  Achievement badges dengan multi-line text (no overflow)
+
+### 3. Responsive Notifications
+-  Auto-create saat setoran/penukaran
+-  Swipe to delete
+-  Color-coded (hijau/orange)
+
+---
+
+**Last Updated:** December 16, 2025  
+**Version:** 2.0.0
