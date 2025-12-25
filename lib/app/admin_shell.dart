@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../app/app_state.dart';
 import '../app/repoint_app.dart';
 import '../features/admin/admin_dashboard_page.dart';
+import '../features/admin/admin_education_page.dart';
 import '../features/admin/admin_rewards_page.dart';
 import '../features/admin/admin_transactions_page.dart';
 import '../features/admin/admin_users_page.dart';
@@ -31,6 +32,7 @@ class _AdminShellState extends State<AdminShell> {
     'Users',
     'Transaksi',
     'Rewards',
+    'Edukasi',
   ];
 
   final List<IconData> _navIcons = const [
@@ -38,6 +40,7 @@ class _AdminShellState extends State<AdminShell> {
     Icons.people,
     Icons.receipt_long,
     Icons.card_giftcard,
+    Icons.school,
   ];
 
   void _onLogout() {
@@ -88,6 +91,10 @@ class _AdminShellState extends State<AdminShell> {
         ),
         AdminRewardsPage(
           key: const PageStorageKey('admin_rewards'),
+          appState: _appState,
+        ),
+        AdminEducationPage(
+          key: const PageStorageKey('admin_education'),
           appState: _appState,
         ),
       ],

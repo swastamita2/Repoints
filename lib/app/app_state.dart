@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../models/admin_stats.dart';
+import '../models/edukasi_item.dart';
 import '../models/history_entry.dart';
 import '../models/notification_item.dart';
 import '../models/reward_item.dart';
@@ -87,6 +88,10 @@ class AppState extends ChangeNotifier {
   final List<NotificationItem> _allNotifications = [];
   List<NotificationItem> get allNotifications =>
       List.unmodifiable(_allNotifications);
+
+  // ===== EDUCATION CONTENT =====
+  final List<EdukasiItem> _edukasiItems = [];
+  List<EdukasiItem> get educationItems => List.unmodifiable(_edukasiItems);
 
   // ===== RATES =====
   static const Map<String, double> ratePerKg = {
@@ -187,6 +192,25 @@ class AppState extends ChangeNotifier {
       return true;
     }
     return false;
+  }
+
+  // ===== EDUCATION MANAGEMENT =====
+  void addEducation(EdukasiItem item) {
+    _edukasiItems.add(item);
+    notifyListeners();
+  }
+
+  void updateEducation(EdukasiItem updatedItem) {
+    final index = _edukasiItems.indexWhere((e) => e.id == updatedItem.id);
+    if (index != -1) {
+      _edukasiItems[index] = updatedItem;
+      notifyListeners();
+    }
+  }
+
+  void deleteEducation(String itemId) {
+    _edukasiItems.removeWhere((e) => e.id == itemId);
+    notifyListeners();
   }
 
   // ===== STATISTICS =====
@@ -483,5 +507,197 @@ class AppState extends ChangeNotifier {
     ];
 
     _allNotifications.addAll(dummyNotifications);
+
+    // Dummy Education Content
+    final dummyEducation = [
+      EdukasiItem(
+        id: 'edu-1',
+        title: 'Cara Memilah Sampah dengan Benar',
+        description:
+            'Panduan lengkap memilah sampah organik, anorganik, dan B3',
+        fullContent: '''
+Memilah sampah adalah langkah pertama menuju pengelolaan sampah yang baik.
+
+**Jenis-jenis Sampah:**
+1. **Sampah Organik**: Sisa makanan, daun, ranting
+2. **Sampah Anorganik**: Plastik, kertas, logam, kaca
+3. **Sampah B3**: Baterai, lampu, obat-obatan
+
+**Tips Pemilahan:**
+- Siapkan 3 tempat sampah berbeda
+- Cuci plastik dan kaleng sebelum dibuang
+- Pisahkan sampah B3 ke tempat khusus
+- Kompos sampah organik jika memungkinkan
+
+Dengan memilah sampah, kita memudahkan proses daur ulang dan mengurangi pencemaran lingkungan.
+        ''',
+        icon: Icons.recycling,
+        imagePath: 'asset/edukasi_placeholder.png',
+        category: EdukasiCategory.daurUlang,
+        readMinutes: 5,
+        publishDate: DateTime.now().subtract(const Duration(days: 10)),
+      ),
+      EdukasiItem(
+        id: 'edu-2',
+        title: 'Dampak Plastik terhadap Lingkungan',
+        description: 'Memahami bahaya plastik sekali pakai bagi ekosistem',
+        fullContent: '''
+Plastik sekali pakai menjadi masalah serius bagi lingkungan.
+
+**Fakta Plastik:**
+- 8 juta ton plastik masuk ke laut setiap tahun
+- Plastik membutuhkan 500+ tahun untuk terurai
+- 90% burung laut memiliki plastik di perutnya
+
+**Solusi:**
+1. Gunakan tas belanja kain
+2. Bawa tumbler sendiri
+3. Tolak sedotan plastik
+4. Pilih produk tanpa kemasan plastik
+
+Mari beralih ke gaya hidup zero waste untuk bumi yang lebih bersih!
+        ''',
+        icon: Icons.eco,
+        imagePath: 'asset/edukasi_placeholder.png',
+        category: EdukasiCategory.lingkungan,
+        readMinutes: 7,
+        publishDate: DateTime.now().subtract(const Duration(days: 8)),
+      ),
+      EdukasiItem(
+        id: 'edu-3',
+        title: '10 Cara Mudah Kurangi Sampah di Rumah',
+        description: 'Tips praktis mengurangi produksi sampah sehari-hari',
+        fullContent: '''
+Mengurangi sampah dimulai dari rumah!
+
+**10 Tips Zero Waste:**
+1. Bawa tas belanja sendiri
+2. Gunakan botol minum isi ulang
+3. Kompos sampah dapur
+4. Beli produk curah tanpa kemasan
+5. Gunakan serbet kain, bukan tisu
+6. Tolak plastik sekali pakai
+7. Repair barang rusak daripada beli baru
+8. Donasi barang bekas layak pakai
+9. Buat pembersih rumah sendiri
+10. Pilih produk ramah lingkungan
+
+Setiap langkah kecil berdampak besar untuk bumi!
+        ''',
+        icon: Icons.lightbulb,
+        imagePath: 'asset/edukasi_placeholder.png',
+        category: EdukasiCategory.tips,
+        readMinutes: 6,
+        publishDate: DateTime.now().subtract(const Duration(days: 5)),
+      ),
+      EdukasiItem(
+        id: 'edu-4',
+        title: 'Inovasi Daur Ulang Plastik Menjadi Bahan Bakar',
+        description: 'Teknologi pirolisis mengubah plastik jadi BBM alternatif',
+        fullContent: '''
+Teknologi pirolisis membuka harapan baru untuk masalah sampah plastik.
+
+**Apa itu Pirolisis?**
+Proses pemanasan plastik tanpa oksigen pada suhu 300-500°C untuk menghasilkan:
+- Minyak mentah (40-80%)
+- Gas (10-20%)
+- Residu karbon (10-30%)
+
+**Keunggulan:**
+✓ Mengurangi volume sampah plastik
+✓ Menghasilkan energi alternatif
+✓ Mengurangi ketergantungan BBM fosil
+✓ Ramah lingkungan
+
+**Tantangan:**
+- Biaya investasi tinggi
+- Perlu pemilahan plastik berkualitas
+- Belum tersedia massal
+
+Indonesia perlu mengembangkan teknologi ini untuk solusi sampah plastik.
+        ''',
+        icon: Icons.science,
+        imagePath: 'asset/edukasi_placeholder.png',
+        category: EdukasiCategory.inovasi,
+        readMinutes: 8,
+        publishDate: DateTime.now().subtract(const Duration(days: 3)),
+      ),
+      EdukasiItem(
+        id: 'edu-5',
+        title: 'Gerakan Bank Sampah di Kampus',
+        description: 'Mari bergabung dengan komunitas peduli lingkungan',
+        fullContent: '''
+Bank Sampah kampus mengajak mahasiswa menabung sambah untuk lingkungan bersih.
+
+**Apa itu Bank Sampah?**
+Sistem pengelolaan sampah dengan konsep menabung - sampah anorganik dikumpulkan, dipilah, dan dijual ke pengepul.
+
+**Manfaat:**
+💚 Mengurangi sampah di TPA
+💰 Dapat penghasilan tambahan
+🌍 Membantu pelestarian lingkungan
+👥 Membangun komunitas peduli
+
+**Cara Bergabung:**
+1. Daftar sebagai nasabah
+2. Kumpulkan sampah anorganik di rumah
+3. Bawa ke bank sampah saat jadwal setor
+4. Sampah ditimbang dan dicatat di buku tabungan
+5. Saldo bisa ditukar reward
+
+Yuk ikut aksi nyata untuk kampus hijau!
+        ''',
+        icon: Icons.groups,
+        imagePath: 'asset/edukasi_placeholder.png',
+        category: EdukasiCategory.komunitas,
+        readMinutes: 5,
+        publishDate: DateTime.now().subtract(const Duration(days: 1)),
+      ),
+      EdukasiItem(
+        id: 'edu-6',
+        title: 'Kreasi DIY dari Botol Plastik Bekas',
+        description: 'Sulap sampah plastik jadi barang berguna dan estetik',
+        fullContent: '''
+Botol plastik bekas bisa disulap jadi barang berguna!
+
+**5 Kreasi Mudah:**
+
+1. **Pot Tanaman Gantung**
+   - Potong botol setengah
+   - Lubangi untuk drainage
+   - Hiasi dengan cat/tali
+   - Gantung di teras
+
+2. **Tempat Pensil**
+   - Potong bagian bawah botol
+   - Hiasi dengan kertas/cat
+   - Simpan alat tulis
+
+3. **Celengan**
+   - Buat celah di tutup botol
+   - Cat dengan warna cerah
+   - Tambahkan dekorasi
+
+4. **Penyiram Tanaman**
+   - Lubangi tutup botol
+   - Isi air
+   - Semprot tanaman
+
+5. **Organizer Kabel**
+   - Potong botol jadi cincin
+   - Gulung kabel di dalamnya
+   - Rapih dan mudah disimpan
+
+Berkreasi sambil mengurangi sampah plastik!
+        ''',
+        icon: Icons.lightbulb,
+        imagePath: 'asset/edukasi_placeholder.png',
+        category: EdukasiCategory.tips,
+        readMinutes: 7,
+        publishDate: DateTime.now().subtract(const Duration(days: 6)),
+      ),
+    ];
+
+    _edukasiItems.addAll(dummyEducation);
   }
 }
