@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+// ignore: avoid_web_libraries_in_flutter
+import 'dart:html' as html;
+import 'dart:convert';
 
 import '../../app/app_state.dart';
 import '../../app/repoint_app.dart';
@@ -110,7 +113,7 @@ class AdminDashboardPage extends StatelessWidget {
           physics: const NeverScrollableScrollPhysics(),
           crossAxisSpacing: 12,
           mainAxisSpacing: 12,
-          childAspectRatio: 1.5,
+          childAspectRatio: 1.3,
           children: [
             _buildStatCard(
               'Total Users',
@@ -166,13 +169,14 @@ class AdminDashboardPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
-            padding: const EdgeInsets.all(8),
+            padding: const EdgeInsets.all(6),
             decoration: BoxDecoration(
               color: color.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(8),
             ),
-            child: Icon(icon, color: color, size: 24),
+            child: Icon(icon, color: color, size: 20),
           ),
+          const SizedBox(height: 4),
           Flexible(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -184,7 +188,7 @@ class AdminDashboardPage extends StatelessWidget {
                   child: Text(
                     value,
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 18,
                       fontWeight: FontWeight.bold,
                       color: color,
                     ),
@@ -193,7 +197,7 @@ class AdminDashboardPage extends StatelessWidget {
                 const SizedBox(height: 2),
                 Text(
                   label,
-                  style: TextStyle(fontSize: 12, color: Colors.grey[600]),
+                  style: TextStyle(fontSize: 11, color: Colors.grey[600]),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -345,33 +349,180 @@ class AdminDashboardPage extends StatelessWidget {
           style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 12),
-        Row(
+        GridView.count(
+          crossAxisCount: 3,
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          crossAxisSpacing: 12,
+          mainAxisSpacing: 12,
+          childAspectRatio: 1.2,
           children: [
-            Expanded(
-              child: _buildActionButton(
-                'View Users',
-                Icons.people,
-                Colors.blue,
-                () {
-                  // Will navigate via bottom nav
-                },
-              ),
+            _buildActionButton('View Users', Icons.people, Colors.blue, () {
+              // Will navigate via bottom nav
+            }),
+            _buildActionButton(
+              'Manage Rewards',
+              Icons.card_giftcard,
+              Colors.orange,
+              () {
+                // Will navigate via bottom nav
+              },
             ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: _buildActionButton(
-                'Manage Rewards',
-                Icons.card_giftcard,
-                Colors.orange,
-                () {
-                  // Will navigate via bottom nav
-                },
-              ),
+            _buildActionButton(
+              'Export Laporan',
+              Icons.download,
+              Colors.green,
+              () => _showExportDialog(context),
             ),
           ],
         ),
       ],
     );
+  }
+
+  void _showExportDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Export Laporan'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Text('Pilih jenis laporan yang ingin diexport:'),
+            const SizedBox(height: 16),
+            ListTile(
+              leading: const Icon(Icons.receipt_long, color: Colors.blue),
+              title: const Text('Laporan Transaksi'),
+              subtitle: const Text('Semua deposit & redemption'),
+              onTap: () {
+                Navigator.pop(context);
+                _exportTransactions();
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.people, color: Colors.green),
+              title: const Text('Laporan Pengguna'),
+              subtitle: const Text('Daftar user dengan statistik'),
+              onTap: () {
+                Navigator.pop(context);
+                _exportUsers();
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.delete_outline, color: Colors.orange),
+              title: const Text('Laporan Sampah'),
+              subtitle: const Text('Data sampah per jenis'),
+              onTap: () {
+                Navigator.pop(context);
+                _exportWaste();
+              },
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Batal'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _exportTransactions() {
+    final transactions = appState.allTransactions;
+
+    // Header CSV
+    final csvContent = StringBuffer();
+    csvContent.writeln('No,Tipe,Judul,Detail,Tanggal,Poin');
+
+    // Data rows
+    for (var i = 0; i < transactions.length; i++) {
+      final t = transactions[i];
+      final type = t.isGain ? 'Deposit' : 'Redemption';
+      csvContent.writeln(
+        '${i + 1},$type,"${t.title}","${t.detail}",${t.dateLabel},${t.pointsDelta}',
+      );
+    }
+
+    _downloadCsv(
+      'Laporan_Transaksi_${_getDateString()}.csv',
+      csvContent.toString(),
+    );
+  }
+
+  void _exportUsers() {
+    final users = appState.allUsers;
+
+    // Header CSV
+    final csvContent = StringBuffer();
+    csvContent.writeln(
+      'No,Nama,Email,Role,NIM/NIP,Jurusan/Unit,Universitas,Tanggal Bergabung',
+    );
+
+    // Data rows
+    for (var i = 0; i < users.length; i++) {
+      final u = users[i];
+      final joinDate =
+          '${u.joinDate.day}/${u.joinDate.month}/${u.joinDate.year}';
+      csvContent.writeln(
+        '${i + 1},"${u.name}",${u.email},${u.userRole},${u.identityNumber},"${u.department}",${u.university},$joinDate',
+      );
+    }
+
+    _downloadCsv(
+      'Laporan_Pengguna_${_getDateString()}.csv',
+      csvContent.toString(),
+    );
+  }
+
+  void _exportWaste() {
+    final stats = appState.calculateStats();
+
+    // Header CSV
+    final csvContent = StringBuffer();
+    csvContent.writeln('Jenis Sampah,Total (kg),Persentase');
+
+    final total = stats.totalKgCollected;
+
+    // Data rows
+    stats.depositsByType.forEach((type, kg) {
+      final percentage = total > 0
+          ? (kg / total * 100).toStringAsFixed(1)
+          : '0.0';
+      csvContent.writeln('$type,$kg,$percentage%');
+    });
+
+    csvContent.writeln('');
+    csvContent.writeln('RINGKASAN');
+    csvContent.writeln('Total Sampah Terkumpul,$total kg');
+    csvContent.writeln(
+      'Total Poin Terdistribusi,${stats.totalPointsDistributed}',
+    );
+    csvContent.writeln('Total Deposit,${stats.totalDeposits}');
+    csvContent.writeln('Total Redemption,${stats.totalRedemptions}');
+
+    _downloadCsv(
+      'Laporan_Sampah_${_getDateString()}.csv',
+      csvContent.toString(),
+    );
+  }
+
+  void _downloadCsv(String filename, String content) {
+    // Convert to bytes with UTF-8 BOM for Excel compatibility
+    final bytes = utf8.encode('\uFEFF$content');
+    final blob = html.Blob([bytes]);
+    final url = html.Url.createObjectUrlFromBlob(blob);
+    // ignore: unused_local_variable
+    final anchor = html.AnchorElement(href: url)
+      ..setAttribute('download', filename)
+      ..click();
+    html.Url.revokeObjectUrl(url);
+  }
+
+  String _getDateString() {
+    final now = DateTime.now();
+    return '${now.year}${now.month.toString().padLeft(2, '0')}${now.day.toString().padLeft(2, '0')}';
   }
 
   Widget _buildActionButton(

@@ -96,45 +96,51 @@ class _AdminShellState extends State<AdminShell> {
 
   Widget _buildBottomNav() {
     return Container(
-      margin: const EdgeInsets.all(12),
-      padding: const EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.95),
-        borderRadius: BorderRadius.circular(28),
+        color: Colors.white,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.1),
-            blurRadius: 18,
-            offset: const Offset(0, 6),
+            color: Colors.black.withValues(alpha: 0.08),
+            blurRadius: 8,
+            offset: const Offset(0, -2),
           ),
         ],
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: List.generate(_navLabels.length, (index) {
-          final selected = index == _selectedIndex;
-          return GestureDetector(
-            onTap: () => setState(() => _selectedIndex = index),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Icon(
-                  _navIcons[index],
-                  color: selected ? RePointApp.primaryGreen : Colors.grey,
+      child: SafeArea(
+        top: false,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: List.generate(_navLabels.length, (index) {
+              final selected = index == _selectedIndex;
+              return GestureDetector(
+                onTap: () => setState(() => _selectedIndex = index),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      _navIcons[index],
+                      color: selected ? RePointApp.primaryGreen : Colors.grey,
+                      size: 26,
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      _navLabels[index],
+                      style: TextStyle(
+                        fontSize: 11,
+                        fontWeight: selected
+                            ? FontWeight.w700
+                            : FontWeight.w500,
+                        color: selected ? RePointApp.primaryGreen : Colors.grey,
+                      ),
+                    ),
+                  ],
                 ),
-                const SizedBox(height: 4),
-                Text(
-                  _navLabels[index],
-                  style: TextStyle(
-                    fontSize: 11,
-                    fontWeight: selected ? FontWeight.w700 : FontWeight.w500,
-                    color: selected ? RePointApp.primaryGreen : Colors.grey,
-                  ),
-                ),
-              ],
-            ),
-          );
-        }),
+              );
+            }),
+          ),
+        ),
       ),
     );
   }
@@ -177,12 +183,8 @@ class _AdminShellState extends State<AdminShell> {
           ),
         ],
       ),
-      body: Stack(
-        children: [
-          SafeArea(bottom: false, child: _buildBody()),
-          Positioned(bottom: 0, left: 0, right: 0, child: _buildBottomNav()),
-        ],
-      ),
+      body: SafeArea(bottom: false, child: _buildBody()),
+      bottomNavigationBar: _buildBottomNav(),
     );
   }
 }

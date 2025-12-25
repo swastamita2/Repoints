@@ -99,18 +99,40 @@ class _AdminRewardsPageState extends State<AdminRewardsPage> {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(12),
-                  child: Image.asset(
-                    reward.imagePath ?? 'asset/Katalog_reward/default.png',
-                    width: 80,
-                    height: 80,
-                    fit: BoxFit.cover,
-                    errorBuilder: (context, error, stackTrace) => Container(
-                      width: 80,
-                      height: 80,
-                      color: Colors.grey[300],
-                      child: const Icon(Icons.image, size: 40),
-                    ),
-                  ),
+                  child: reward.imagePath != null
+                      ? Image.asset(
+                          reward.imagePath!,
+                          width: 80,
+                          height: 80,
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) =>
+                              Container(
+                                width: 80,
+                                height: 80,
+                                decoration: BoxDecoration(
+                                  color: reward.accent.withValues(alpha: 0.1),
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                child: Icon(
+                                  reward.icon,
+                                  size: 40,
+                                  color: reward.accent,
+                                ),
+                              ),
+                        )
+                      : Container(
+                          width: 80,
+                          height: 80,
+                          decoration: BoxDecoration(
+                            color: reward.accent.withValues(alpha: 0.1),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Icon(
+                            reward.icon,
+                            size: 40,
+                            color: reward.accent,
+                          ),
+                        ),
                 ),
                 const SizedBox(width: 16),
                 Expanded(

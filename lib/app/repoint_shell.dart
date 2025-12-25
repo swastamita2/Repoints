@@ -771,51 +771,57 @@ Mulai sekarang, mari biasakan memisahkan sampah dengan benar!
 
   Widget _buildBottomNav() {
     return Container(
-      margin: const EdgeInsets.all(12),
-      padding: const EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.95),
-        borderRadius: BorderRadius.circular(28),
+        color: Colors.white,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.1),
-            blurRadius: 18,
-            offset: const Offset(0, 6),
+            color: Colors.black.withValues(alpha: 0.08),
+            blurRadius: 8,
+            offset: const Offset(0, -2),
           ),
         ],
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: List.generate(_navLabels.length, (index) {
-          final selected = index == _selectedIndex;
-          return GestureDetector(
-            onTap: () {
-              if (index == 3) {
-                _openRewardPage();
-              } else {
-                setState(() => _selectedIndex = index);
-              }
-            },
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Icon(
-                  _navIcons[index],
-                  color: selected ? RePointApp.primaryGreen : Colors.grey,
+      child: SafeArea(
+        top: false,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: List.generate(_navLabels.length, (index) {
+              final selected = index == _selectedIndex;
+              return GestureDetector(
+                onTap: () {
+                  if (index == 3) {
+                    _openRewardPage();
+                  } else {
+                    setState(() => _selectedIndex = index);
+                  }
+                },
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      _navIcons[index],
+                      color: selected ? RePointApp.primaryGreen : Colors.grey,
+                      size: 26,
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      _navLabels[index],
+                      style: TextStyle(
+                        fontSize: 11,
+                        color: selected ? RePointApp.primaryGreen : Colors.grey,
+                        fontWeight: selected
+                            ? FontWeight.w600
+                            : FontWeight.normal,
+                      ),
+                    ),
+                  ],
                 ),
-                const SizedBox(height: 4),
-                Text(
-                  _navLabels[index],
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: selected ? RePointApp.primaryGreen : Colors.grey,
-                    fontWeight: selected ? FontWeight.w600 : FontWeight.normal,
-                  ),
-                ),
-              ],
-            ),
-          );
-        }),
+              );
+            }),
+          ),
+        ),
       ),
     );
   }
@@ -823,7 +829,6 @@ Mulai sekarang, mari biasakan memisahkan sampah dengan benar!
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBody: true,
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
