@@ -55,7 +55,134 @@ RePoints menerapkan model **Circular Economy** dengan sistem poin:
 
 ## ✨ Fitur Utama
 
-### 🔐 1. Autentikasi & Profil User
+### � ADMIN PANEL (New!)
+
+**Sistem Manajemen untuk Administrator**
+
+**Login Admin:**
+- Email admin: `admin@admin.itpln.ac.id`
+- Password: `admin123`
+- Deteksi otomatis berdasarkan domain email
+
+**5 Menu Utama:**
+
+#### 1. 📊 Dashboard
+- **Statistik Real-time:**
+  - Total users (breakdown: Mahasiswa, Dosen, Staff)
+  - Total kg sampah terkumpul
+  - Total poin terdistribusi
+  - Transaksi hari ini
+- **Charts & Visualisasi:**
+  - User breakdown by role (pie chart representation)
+  - Deposit breakdown by type (Plastik, Kertas, Logam, Kaca)
+- **Quick Actions:**
+  - View Users
+  - Manage Rewards
+  - Export Laporan
+- **Export Feature:**
+  - Laporan Transaksi (CSV)
+  - Laporan Pengguna (CSV)
+  - Laporan Sampah per Jenis (CSV)
+  - UTF-8 encoding dengan BOM
+  - Auto-download via browser
+
+#### 2. 👥 Users Management
+- **User List:**
+  - View all registered users
+  - Display: Avatar, Nama, Email, Role, Jurusan
+  - User counter badge
+- **Search & Filter:**
+  - Search by name
+  - Filter by role (All, Mahasiswa, Dosen, Staff)
+- **User Details:**
+  - Full profile information
+  - Join date
+  - Contact details
+
+#### 3. 📝 Transaksi Management
+- **Transaction List:**
+  - All deposits and redemptions
+  - Chronological order (newest first)
+- **Details per Transaction:**
+  - User name and avatar
+  - Type (Deposit/Redemption)
+  - Item details (waste type or reward name)
+  - Points delta (+/-)
+  - Timestamp
+- **Filter Options:**
+  - All transactions
+  - Deposits only
+  - Redemptions only
+
+#### 4. 🎁 Rewards Management
+- **Catalog Display:**
+  - Grid view with product images
+  - Stock count visible
+  - Active/inactive status toggle
+- **CRUD Operations:**
+  - ➕ Add new reward
+  - ✏️ Edit existing reward
+  - 🗑️ Delete reward
+  - 🔄 Toggle active status
+- **Form Fields:**
+  - Title (nama reward)
+  - Description
+  - Cost (harga dalam poin)
+  - Stock (jumlah tersedia)
+  - Icon selection
+  - Image path
+  - Active status
+- **Stock Management:**
+  - Auto-reduce on redemption
+  - Stock warning indicators
+  - Prevent redemption when out of stock
+
+#### 5. 📚 Edukasi Management (New!)
+- **Content List:**
+  - All education articles
+  - Display: Icon, Title, Description, Category, Read time
+  - Article counter badge
+- **Filter by Category:**
+  - All
+  - Daur Ulang
+  - Lingkungan
+  - Tips & Trik
+  - Inovasi
+  - Komunitas
+- **CRUD Operations:**
+  - ➕ Add new article
+  - ✏️ Edit existing article
+  - 🗑️ Delete article
+- **Form Fields:**
+  - Title (judul artikel)
+  - Description (deskripsi singkat)
+  - Full Content (konten lengkap, multiline)
+  - Category (dropdown enum)
+  - Read Minutes (waktu baca estimasi)
+- **Content Display:**
+  - Card view with category color coding
+  - Icon per category
+  - Read time indicator
+  - Three-dot menu (edit/delete)
+
+**Admin Features:**
+- 🔐 Secure login with password validation
+- 🎨 Responsive design (mobile & desktop)
+- 📊 Real-time statistics calculation
+- 💾 In-memory state management (AppState singleton)
+- 🚪 Logout with confirmation
+- 🎯 Integrated bottom navigation (5 tabs)
+
+**Dummy Data (for demo):**
+- 8 registered users (5 Mahasiswa, 2 Dosen, 1 Staff)
+- 10 sample transactions
+- 6 reward items with images
+- 6 education articles across all categories
+- 5 notifications
+
+---
+
+### �🔐 1. Autentikasi & Profil User
 
 **Login & Registrasi yang Personal**
 
@@ -380,11 +507,19 @@ lib/
 ├── main.dart                      # Entry point aplikasi
 ├── app/
 │   ├── repoint_app.dart          # Konfigurasi MaterialApp, theme, routing
-│   └── repoint_shell.dart        # Shell dengan BottomNavigationBar, state management
+│   ├── repoint_shell.dart        # Shell dengan BottomNavigationBar (User)
+│   ├── admin_shell.dart          # ⭐ Shell admin dengan 5-tab navigation
+│   └── app_state.dart            # ⭐ Global state management (singleton)
 ├── features/                      # Fitur aplikasi (feature-first architecture)
 │   ├── auth/                      # ⭐ Autentikasi
-│   │   ├── login_page.dart       # Halaman login
+│   │   ├── login_page.dart       # Halaman login (user & admin)
 │   │   └── registration_page.dart # Halaman registrasi
+│   ├── admin/                     # ⭐ Admin Panel (NEW)
+│   │   ├── admin_dashboard_page.dart      # Dashboard & statistics
+│   │   ├── admin_users_page.dart          # User management
+│   │   ├── admin_transactions_page.dart   # Transaction history
+│   │   ├── admin_rewards_page.dart        # Reward CRUD
+│   │   └── admin_education_page.dart      # Education content CRUD
 │   ├── home/
 │   │   └── home_page.dart        # Halaman beranda
 │   ├── setor/
@@ -404,8 +539,10 @@ lib/
 ├── models/                        # Data models
 │   ├── user_profile.dart         # Model profil pengguna
 │   ├── history_entry.dart        # Model entri riwayat
-│   ├── reward_item.dart          # Model item reward
-│   └── edukasi_item.dart         # Model artikel edukasi
+│   ├── reward_item.dart          # Model item reward (+ stock, isActive)
+│   ├── edukasi_item.dart         # Model artikel edukasi
+│   ├── admin_stats.dart          # ⭐ Model statistik admin
+│   └── notification_item.dart    # Model notifikasi
 ├── widgets/                       # Reusable widgets
 │   ├── action_square.dart        # Button aksi di home
 │   └── history_tile.dart         # Widget tile riwayat
@@ -423,17 +560,36 @@ lib/
 
 ### State Management
 
-Saat ini menggunakan **StatefulWidget** dengan local state di `RePointShell`:
+Aplikasi menggunakan **AppState Singleton Pattern** untuk global state management:
 
-- `_userProfile`: Data profil pengguna
-- `_userPoints`: Total poin pengguna
-- `_monthlyKg`: Total kg sampah bulan ini
-- `_history`: List riwayat transaksi
-- `_rewardCatalog`: Katalog reward
+#### AppState (lib/app/app_state.dart)
+Singleton class dengan `ChangeNotifier` untuk state management terpusat:
+
+**User Data:**
+- `_allUsers`: List semua registered users
+- `_allTransactions`: List semua transaksi (deposit & redemption)
+- `_allNotifications`: List notifikasi user
+
+**Catalog Data:**
+- `_rewards`: Katalog reward dengan stock management
 - `_edukasiItems`: List artikel edukasi
-- `_selectedIndex`: Index halaman yang aktif di bottom nav
 
-**Catatan**: Untuk pengembangan lebih lanjut, disarankan migrasi ke state management yang lebih robust seperti Provider, Riverpod, atau Bloc.
+**CRUD Methods:**
+- User: `registerUser()`, `getUserById()`, `updateUser()`
+- Transaction: `addTransaction()`, `getTransactionsByUserId()`
+- Reward: `addReward()`, `updateReward()`, `deleteReward()`, `checkAndReduceStock()`
+- Education: `addEducation()`, `updateEducation()`, `deleteEducation()`
+- Statistics: `calculateStats()` (untuk admin dashboard)
+
+**Dummy Data:**
+- Auto-initialize dengan 8 users, 10 transactions, 6 rewards, 6 articles
+- Untuk demo dan testing purposes
+
+**Local State:**
+- `RePointShell`: State untuk user interface (5-tab navigation)
+- `AdminShell`: State untuk admin interface (5-tab navigation)
+
+**Catatan**: Saat ini menggunakan in-memory storage. Untuk production, perlu integrasi dengan database (Firebase/REST API).
 
 ### Navigasi
 
@@ -449,15 +605,14 @@ Saat ini menggunakan **StatefulWidget** dengan local state di `RePointShell`:
 
 ```dart
 class UserProfile {
-  String id;              // Unique identifier
+  String id;              // Unique identifier (email)
   String name;            // Nama lengkap
-  String email;           // Email mahasiswa
+  String email;           // Email mahasiswa/dosen/staff
   String phone;           // Nomor telepon
-  String university;      // Nama universitas
-  String faculty;         // Fakultas
-  String major;           // Jurusan
-  String nim;             // NIM
-  String profileImage;    // URL/path foto profil
+  String userRole;        // Role: Mahasiswa/Dosen/Tendik/Staff
+  String identityNumber;  // NIM/NIP
+  String university;      // Nama universitas (IT PLN)
+  String department;      // Jurusan/Departemen
   DateTime joinDate;      // Tanggal bergabung
 }
 ```
@@ -478,11 +633,15 @@ class HistoryEntry {
 
 ```dart
 class RewardItem {
+  String id;              // Unique identifier
   String title;           // Nama reward
   int cost;               // Harga dalam poin
   String description;     // Deskripsi reward
   IconData icon;          // Icon
   Color accent;           // Warna aksen
+  String imagePath;       // Path gambar produk
+  int stock;              // Jumlah stok tersedia (NEW)
+  bool isActive;          // Status aktif/nonaktif (NEW)
 }
 ```
 
@@ -496,7 +655,7 @@ class EdukasiItem {
   String fullContent;     // Konten lengkap
   IconData icon;          // Icon kategori
   String imagePath;       // Path gambar artikel
-  EdukasiCategory category; // Kategori artikel
+  EdukasiCategory category; // Kategori artikel (enum)
   int readMinutes;        // Estimasi waktu baca
   DateTime publishDate;   // Tanggal publikasi
   List<String> tags;      // Tag artikel
@@ -505,7 +664,38 @@ class EdukasiItem {
 }
 ```
 
-### 5. SetoranInput
+### 5. AdminStats (NEW)
+
+```dart
+class AdminStats {
+  int totalUsers;              // Total pengguna terdaftar
+  int totalMahasiswa;          // Total mahasiswa
+  int totalDosen;              // Total dosen
+  int totalStaff;              // Total staff/tendik
+  double totalKgCollected;     // Total kg sampah terkumpul
+  int totalPointsDistributed;  // Total poin terdistribusi
+  int todayTransactions;       // Transaksi hari ini
+  int totalDeposits;           // Total setoran
+  int totalRedemptions;        // Total penukaran
+  Map<String, int> usersByFaculty;      // User per fakultas
+  List<TopContributor> topContributors; // Top 5 kontributor
+  Map<String, double> depositsByType;   // Sampah per jenis
+}
+```
+
+### 6. NotificationItem (NEW)
+
+```dart
+class NotificationItem {
+  String id;              // Unique identifier
+  String title;           // Judul notifikasi
+  String subtitle;        // Subtitle/detail
+  DateTime date;          // Tanggal notifikasi
+  NotificationType type;  // Type: deposit/redemption/system
+}
+```
+
+### 7. SetoranInput
 
 ```dart
 class SetoranInput {
@@ -772,14 +962,16 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.8 # iOS style icons
-  google_fonts: ^6.0.0 # Custom fonts (Poppins)
-  flutter_svg: ^2.0.10+1 # SVG support
+  google_fonts: ^6.0.0    # Custom fonts (Poppins)
+  flutter_svg: ^2.0.10+1  # SVG support
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^5.0.0 # Linting rules
+  flutter_lints: ^5.0.0   # Linting rules
 ```
+
+**Note:** Admin dashboard menggunakan `dart:html` untuk fitur export CSV (browser download). Library ini deprecated untuk WASM builds, tapi masih berfungsi normal untuk web builds standard.
 
 ### Design System
 
@@ -886,6 +1078,13 @@ flutter build web --release
   - Toggle password visibility
   - Navigasi antar halaman auth
   - Lihat [AUTH_GUIDE.md](AUTH_GUIDE.md) untuk detail
+- [x] ✅ **Admin Panel** - COMPLETED
+  - Dashboard admin dengan statistik lengkap
+  - Manajemen user (view, search, filter)
+  - Manajemen transaksi dengan filter
+  - Manajemen reward (CRUD lengkap)
+  - Manajemen konten edukasi (CRUD lengkap)
+  - Export laporan (CSV format)
 - [ ] Integrasi dengan REST API / Firebase
 - [ ] JWT token management dan secure storage
 - [ ] Sinkronisasi data real-time
