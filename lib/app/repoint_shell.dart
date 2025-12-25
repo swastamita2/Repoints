@@ -95,13 +95,13 @@ class _RePointShellState extends State<RePointShell> {
     ),
   ];
 
-  final List<RewardItem> _rewardCatalog = const [
+  final List<RewardItem> _rewardCatalog = [
     RewardItem(
       title: 'Voucher Kopi Kampus',
       cost: 450,
       description: 'Satu cup kopi dari kedai kampus',
       icon: Icons.coffee,
-      accent: Color(0xFF8BC34A),
+      accent: const Color(0xFF8BC34A),
       imagePath: 'asset/Katalog_reward/Voucher_Kopi_Kampus.png',
     ),
     RewardItem(
@@ -109,7 +109,7 @@ class _RePointShellState extends State<RePointShell> {
       cost: 520,
       description: 'Tumbler stainless untuk air minum',
       icon: Icons.water_drop,
-      accent: Color(0xFF388E3C),
+      accent: const Color(0xFF388E3C),
       imagePath: 'asset/Katalog_reward/Tumbler_Ekslusif.png',
     ),
     RewardItem(
@@ -117,7 +117,7 @@ class _RePointShellState extends State<RePointShell> {
       cost: 380,
       description: 'Tas belanja ramah lingkungan',
       icon: Icons.shopping_bag,
-      accent: Color(0xFF4CAF50),
+      accent: const Color(0xFF4CAF50),
       imagePath: 'asset/Katalog_reward/ToteBag_RePoints.png',
     ),
     RewardItem(
@@ -125,7 +125,7 @@ class _RePointShellState extends State<RePointShell> {
       cost: 500,
       description: 'Voucher belanja minimarket',
       icon: Icons.store,
-      accent: Color(0xFF66BB6A),
+      accent: const Color(0xFF66BB6A),
       imagePath: 'asset/Katalog_reward/Voucher_Minimarket_Gorong.png',
     ),
     RewardItem(
@@ -133,7 +133,7 @@ class _RePointShellState extends State<RePointShell> {
       cost: 350,
       description: 'Voucher print dan fotokopi',
       icon: Icons.print,
-      accent: Color(0xFF81C784),
+      accent: const Color(0xFF81C784),
       imagePath: 'asset/Katalog_reward/Voucher_Print_Gorong.png',
     ),
     RewardItem(
@@ -141,7 +141,7 @@ class _RePointShellState extends State<RePointShell> {
       cost: 600,
       description: 'Kaos eksklusif RePoints',
       icon: Icons.checkroom,
-      accent: Color(0xFF4CAF50),
+      accent: const Color(0xFF4CAF50),
       imagePath: 'asset/Katalog_reward/Kaos_RePoints.png',
     ),
   ];

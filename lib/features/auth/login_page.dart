@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../../app/admin_shell.dart';
+import '../../app/app_state.dart';
 import '../../app/repoint_app.dart';
 import '../../app/repoint_shell.dart';
+import '../../models/user_profile.dart';
 import 'registration_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -28,6 +31,7 @@ class _LoginPageState extends State<LoginPage> {
     if (_formKey.currentState!.validate()) {
       // Get email and extract name (use part before @ as name)
       final email = _emailController.text.trim();
+      final password = _passwordController.text.trim();
       final username = email.split('@').first.replaceAll('.', ' ');
       final capitalizedName = username
           .split(' ')
@@ -36,6 +40,28 @@ class _LoginPageState extends State<LoginPage> {
                 word.isEmpty ? '' : word[0].toUpperCase() + word.substring(1),
           )
           .join(' ');
+
+      // Check if admin login
+      if (email.contains('@admin.itpln.ac.id')) {
+        // Validate admin password
+        if (password != 'admin123') {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Password admin salah!'),
+              backgroundColor: Colors.red,
+            ),
+          );
+          return;
+        }
+
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) =>
+                AdminShell(adminName: capitalizedName, adminEmail: email),
+          ),
+        );
+        return;
+      }
 
       // Determine role based on email domain (simple logic for demo)
       String role = 'Mahasiswa';
@@ -52,6 +78,20 @@ class _LoginPageState extends State<LoginPage> {
         department = 'Akademik';
         identityNumber = '199001012020121001';
       }
+
+      // Register user in AppState
+      final userProfile = UserProfile(
+        id: email,
+        name: capitalizedName,
+        email: email,
+        phone: '081234567890',
+        userRole: role,
+        identityNumber: identityNumber,
+        university: 'IT PLN',
+        department: department,
+        joinDate: DateTime.now(),
+      );
+      AppState().registerUser(userProfile);
 
       // Navigate to main app with user data
       Navigator.of(context).pushReplacement(
