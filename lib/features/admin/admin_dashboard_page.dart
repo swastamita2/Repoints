@@ -26,21 +26,19 @@ class AdminDashboardPage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _buildWelcomeHeader(),
+          _buildWelcomeHeader(context),
           const SizedBox(height: 24),
           _buildOverviewCards(stats),
           const SizedBox(height: 24),
           _buildUserBreakdown(stats),
           const SizedBox(height: 24),
           _buildDepositsByType(stats),
-          const SizedBox(height: 24),
-          _buildQuickActions(context),
         ],
       ),
     );
   }
 
-  Widget _buildWelcomeHeader() {
+  Widget _buildWelcomeHeader(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
@@ -91,6 +89,21 @@ class AdminDashboardPage extends StatelessWidget {
                   style: TextStyle(color: Colors.white70, fontSize: 14),
                 ),
               ],
+            ),
+          ),
+          const SizedBox(width: 12),
+          ElevatedButton.icon(
+            onPressed: () => _showExportDialog(context),
+            icon: const Icon(Icons.download, size: 20),
+            label: const Text('Export'),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.white,
+              foregroundColor: RePointApp.primaryGreen,
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+              elevation: 0,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
             ),
           ),
         ],
@@ -340,46 +353,6 @@ class AdminDashboardPage extends StatelessWidget {
     );
   }
 
-  Widget _buildQuickActions(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text(
-          'Quick Actions',
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-        ),
-        const SizedBox(height: 12),
-        GridView.count(
-          crossAxisCount: 3,
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          crossAxisSpacing: 12,
-          mainAxisSpacing: 12,
-          childAspectRatio: 1.2,
-          children: [
-            _buildActionButton('View Users', Icons.people, Colors.blue, () {
-              // Will navigate via bottom nav
-            }),
-            _buildActionButton(
-              'Manage Rewards',
-              Icons.card_giftcard,
-              Colors.orange,
-              () {
-                // Will navigate via bottom nav
-              },
-            ),
-            _buildActionButton(
-              'Export Laporan',
-              Icons.download,
-              Colors.green,
-              () => _showExportDialog(context),
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-
   void _showExportDialog(BuildContext context) {
     showDialog(
       context: context,
@@ -523,40 +496,5 @@ class AdminDashboardPage extends StatelessWidget {
   String _getDateString() {
     final now = DateTime.now();
     return '${now.year}${now.month.toString().padLeft(2, '0')}${now.day.toString().padLeft(2, '0')}';
-  }
-
-  Widget _buildActionButton(
-    String label,
-    IconData icon,
-    Color color,
-    VoidCallback onTap,
-  ) {
-    return InkWell(
-      onTap: onTap,
-      borderRadius: BorderRadius.circular(12),
-      child: Container(
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: color.withValues(alpha: 0.1),
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: color.withValues(alpha: 0.3), width: 1),
-        ),
-        child: Column(
-          children: [
-            Icon(icon, color: color, size: 32),
-            const SizedBox(height: 8),
-            Text(
-              label,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.w600,
-                color: color,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
   }
 }

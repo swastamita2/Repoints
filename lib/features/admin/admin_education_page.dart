@@ -15,10 +15,27 @@ class AdminEducationPage extends StatefulWidget {
 
 class _AdminEducationPageState extends State<AdminEducationPage> {
   String _filterCategory = 'All';
+  String _searchQuery = '';
 
   List<EdukasiItem> get _filteredEducation {
     var items = widget.appState.educationItems;
 
+    // Filter by search query
+    if (_searchQuery.isNotEmpty) {
+      items = items.where((item) {
+        final matchesSearch =
+            item.title.toLowerCase().contains(_searchQuery.toLowerCase()) ||
+            item.description.toLowerCase().contains(
+              _searchQuery.toLowerCase(),
+            ) ||
+            item.tags.any(
+              (tag) => tag.toLowerCase().contains(_searchQuery.toLowerCase()),
+            );
+        return matchesSearch;
+      }).toList();
+    }
+
+    // Filter by category
     if (_filterCategory != 'All') {
       items = items.where((e) => e.categoryName == _filterCategory).toList();
     }
@@ -41,28 +58,65 @@ class _AdminEducationPageState extends State<AdminEducationPage> {
     return Container(
       padding: const EdgeInsets.all(20),
       color: Colors.white,
-      child: Row(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  'Kelola Konten Edukasi',
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          Row(
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Kelola Konten Edukasi',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      '${_filteredEducation.length} dari ${widget.appState.educationItems.length} artikel',
+                      style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+                    ),
+                  ],
                 ),
-                const SizedBox(height: 8),
-                Text(
-                  '${widget.appState.educationItems.length} artikel edukasi',
-                  style: TextStyle(fontSize: 14, color: Colors.grey[600]),
-                ),
-              ],
-            ),
+              ),
+              FloatingActionButton(
+                onPressed: _showAddEducationDialog,
+                backgroundColor: RePointApp.primaryGreen,
+                child: const Icon(Icons.add),
+              ),
+            ],
           ),
-          FloatingActionButton(
-            onPressed: _showAddEducationDialog,
-            backgroundColor: RePointApp.primaryGreen,
-            child: const Icon(Icons.add),
+          const SizedBox(height: 16),
+          // Search Bar
+          TextField(
+            onChanged: (value) => setState(() => _searchQuery = value),
+            decoration: InputDecoration(
+              hintText: 'Cari judul, deskripsi, atau tag...',
+              hintStyle: TextStyle(color: Colors.grey.shade500),
+              prefixIcon: const Icon(
+                Icons.search,
+                color: RePointApp.primaryGreen,
+              ),
+              suffixIcon: _searchQuery.isNotEmpty
+                  ? IconButton(
+                      icon: const Icon(Icons.clear, size: 20),
+                      onPressed: () => setState(() => _searchQuery = ''),
+                    )
+                  : null,
+              filled: true,
+              fillColor: Colors.grey.shade100,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: BorderSide.none,
+              ),
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 16,
+                vertical: 12,
+              ),
+            ),
           ),
         ],
       ),

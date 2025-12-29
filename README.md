@@ -60,6 +60,7 @@ RePoints menerapkan model **Circular Economy** dengan sistem poin:
 **Sistem Manajemen untuk Administrator**
 
 **Login Admin:**
+
 - Email admin: `admin@admin.itpln.ac.id`
 - Password: `admin123`
 - Deteksi otomatis berdasarkan domain email
@@ -67,6 +68,7 @@ RePoints menerapkan model **Circular Economy** dengan sistem poin:
 **5 Menu Utama:**
 
 #### 1. 📊 Dashboard
+
 - **Statistik Real-time:**
   - Total users (breakdown: Mahasiswa, Dosen, Staff)
   - Total kg sampah terkumpul
@@ -87,6 +89,7 @@ RePoints menerapkan model **Circular Economy** dengan sistem poin:
   - Auto-download via browser
 
 #### 2. 👥 Users Management
+
 - **User List:**
   - View all registered users
   - Display: Avatar, Nama, Email, Role, Jurusan
@@ -100,6 +103,7 @@ RePoints menerapkan model **Circular Economy** dengan sistem poin:
   - Contact details
 
 #### 3. 📝 Transaksi Management
+
 - **Transaction List:**
   - All deposits and redemptions
   - Chronological order (newest first)
@@ -115,6 +119,7 @@ RePoints menerapkan model **Circular Economy** dengan sistem poin:
   - Redemptions only
 
 #### 4. 🎁 Rewards Management
+
 - **Catalog Display:**
   - Grid view with product images
   - Stock count visible
@@ -138,6 +143,7 @@ RePoints menerapkan model **Circular Economy** dengan sistem poin:
   - Prevent redemption when out of stock
 
 #### 5. 📚 Edukasi Management (New!)
+
 - **Content List:**
   - All education articles
   - Display: Icon, Title, Description, Category, Read time
@@ -166,6 +172,7 @@ RePoints menerapkan model **Circular Economy** dengan sistem poin:
   - Three-dot menu (edit/delete)
 
 **Admin Features:**
+
 - 🔐 Secure login with password validation
 - 🎨 Responsive design (mobile & desktop)
 - 📊 Real-time statistics calculation
@@ -174,6 +181,7 @@ RePoints menerapkan model **Circular Economy** dengan sistem poin:
 - 🎯 Integrated bottom navigation (5 tabs)
 
 **Dummy Data (for demo):**
+
 - 8 registered users (5 Mahasiswa, 2 Dosen, 1 Staff)
 - 10 sample transactions
 - 6 reward items with images
@@ -563,18 +571,22 @@ lib/
 Aplikasi menggunakan **AppState Singleton Pattern** untuk global state management:
 
 #### AppState (lib/app/app_state.dart)
+
 Singleton class dengan `ChangeNotifier` untuk state management terpusat:
 
 **User Data:**
+
 - `_allUsers`: List semua registered users
 - `_allTransactions`: List semua transaksi (deposit & redemption)
 - `_allNotifications`: List notifikasi user
 
 **Catalog Data:**
+
 - `_rewards`: Katalog reward dengan stock management
 - `_edukasiItems`: List artikel edukasi
 
 **CRUD Methods:**
+
 - User: `registerUser()`, `getUserById()`, `updateUser()`
 - Transaction: `addTransaction()`, `getTransactionsByUserId()`
 - Reward: `addReward()`, `updateReward()`, `deleteReward()`, `checkAndReduceStock()`
@@ -582,10 +594,12 @@ Singleton class dengan `ChangeNotifier` untuk state management terpusat:
 - Statistics: `calculateStats()` (untuk admin dashboard)
 
 **Dummy Data:**
+
 - Auto-initialize dengan 8 users, 10 transactions, 6 rewards, 6 articles
 - Untuk demo dan testing purposes
 
 **Local State:**
+
 - `RePointShell`: State untuk user interface (5-tab navigation)
 - `AdminShell`: State untuk admin interface (5-tab navigation)
 
@@ -962,13 +976,13 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.8 # iOS style icons
-  google_fonts: ^6.0.0    # Custom fonts (Poppins)
-  flutter_svg: ^2.0.10+1  # SVG support
+  google_fonts: ^6.0.0 # Custom fonts (Poppins)
+  flutter_svg: ^2.0.10+1 # SVG support
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^5.0.0   # Linting rules
+  flutter_lints: ^5.0.0 # Linting rules
 ```
 
 **Note:** Admin dashboard menggunakan `dart:html` untuk fitur export CSV (browser download). Library ini deprecated untuk WASM builds, tapi masih berfungsi normal untuk web builds standard.
