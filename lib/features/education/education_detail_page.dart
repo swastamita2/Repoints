@@ -322,7 +322,7 @@ class _EducationDetailPageState extends State<EducationDetailPage>
 
                       // Full Content
                       Text(
-                        widget.article.fullContent,
+                        widget.article.fullContent.replaceAll('**', ''),
                         style: const TextStyle(
                           fontSize: 16,
                           color: Colors.black87,

@@ -27,7 +27,7 @@ The application addresses waste management challenges in academic institutions b
 **Institut Teknologi PLN Academic Community:**
 
 - **Students**: Primary users with NIM-based identification
-- **Faculty**: Teaching staff with NIP-based identification  
+- **Faculty**: Teaching staff with NIP-based identification
 - **Staff**: Administrative personnel with NIP-based identification
 
 **Supported Faculties:**
@@ -47,6 +47,7 @@ The application addresses waste management challenges in academic institutions b
 Administrative interface for system management and monitoring.
 
 **Authentication:**
+
 - Email: `admin@admin.itpln.ac.id`
 - Password: `admin123`
 - Domain-based automatic role detection
@@ -56,22 +57,26 @@ Administrative interface for system management and monitoring.
 #### 1. Dashboard
 
 **Header Section:**
+
 - Welcome card with admin greeting
 - Prominent export button for quick access
 - Direct access to export dialog without scrolling
 
 **Real-time Statistics:**
+
 - Total registered users with role breakdown (Students, Faculty, Staff)
 - Total waste collected (kg)
 - Total points distributed
 - Daily transaction count
 
 **Data Visualization:**
+
 - User distribution by role
 - Waste collection by type (Plastic, Paper, Metal, Glass)
 - Progress bars with percentage indicators
 
 **Export Functionality:**
+
 - Transaction Report (CSV format)
 - User Report (CSV format)
 - Waste Collection Report by Type (CSV format)
@@ -82,15 +87,18 @@ Administrative interface for system management and monitoring.
 #### 2. User Management
 
 **User Directory:**
+
 - Complete list of registered users
 - Display columns: Avatar, Name, Email, Role, Department
 - User count badge
 
 **Search and Filter:**
+
 - Name-based search
 - Role filter (All, Students, Faculty, Staff)
 
 **User Details:**
+
 - Complete profile information
 - Registration date
 - Contact details
@@ -98,10 +106,12 @@ Administrative interface for system management and monitoring.
 #### 3. Transaction Management
 
 **Transaction Log:**
+
 - Complete deposit and redemption records
 - Chronological sorting (newest first)
 
 **Transaction Details:**
+
 - User name with avatar
 - Transaction type (Deposit/Redemption)
 - Item details (waste type or reward name)
@@ -109,6 +119,7 @@ Administrative interface for system management and monitoring.
 - Timestamp
 
 **Filtering:**
+
 - All transactions
 - Deposits only
 - Redemptions only
@@ -116,17 +127,20 @@ Administrative interface for system management and monitoring.
 #### 4. Reward Catalog Management
 
 **Catalog Display:**
+
 - Grid layout with product images
 - Stock counter
 - Active/inactive status toggle
 
 **CRUD Operations:**
+
 - Create new reward
 - Edit existing reward
 - Delete reward
 - Toggle active status
 
 **Reward Properties:**
+
 - Title
 - Description
 - Point cost
@@ -136,6 +150,7 @@ Administrative interface for system management and monitoring.
 - Active status
 
 **Stock Management:**
+
 - Automatic stock reduction on redemption
 - Stock warning indicators
 - Prevention of redemption when out of stock
@@ -143,17 +158,20 @@ Administrative interface for system management and monitoring.
 #### 5. Educational Content Management
 
 **Search Functionality:**
+
 - Real-time search (title, description, tags)
 - Clear button
 - Dynamic counter display (X of Y articles)
 - Combined with category filtering
 
 **Content Listing:**
+
 - All educational articles
 - Display: Icon, Title, Description, Category, Reading time
 - Article count badge
 
 **Category Filtering:**
+
 - All categories
 - Recycling
 - Environment
@@ -162,11 +180,13 @@ Administrative interface for system management and monitoring.
 - Community
 
 **CRUD Operations:**
+
 - Create new article
 - Edit existing article
 - Delete article
 
 **Article Properties:**
+
 - Title
 - Short description
 - Full content (multiline support)
@@ -174,12 +194,14 @@ Administrative interface for system management and monitoring.
 - Estimated reading time
 
 **Display Features:**
+
 - Card view with category-based color coding
 - Category-specific icons
 - Reading time indicator
 - Context menu for edit/delete operations
 
 **Administrative Features:**
+
 - Secure password-protected login
 - Responsive design (mobile and desktop)
 - Real-time statistics calculation
@@ -188,6 +210,7 @@ Administrative interface for system management and monitoring.
 - Integrated 5-tab bottom navigation
 
 **Demo Data:**
+
 - 8 registered users (5 Students, 2 Faculty, 1 Staff)
 - 10 sample transactions
 - 6 reward items with images
@@ -201,6 +224,7 @@ Administrative interface for system management and monitoring.
 #### 1. Authentication and Profile
 
 **Login and Registration:**
+
 - Institutional email-based authentication
 - Comprehensive registration form (NIM, Department, Faculty)
 - Automatic user name display across application
@@ -208,6 +232,7 @@ Administrative interface for system management and monitoring.
 - Logout confirmation
 
 **Profile Management:**
+
 - Complete personal data (Name, Email, Phone, Department)
 - Institution: Institut Teknologi PLN
 - Auto-generated avatar from initials
@@ -215,6 +240,7 @@ Administrative interface for system management and monitoring.
 - Transaction history access
 
 **User Flow:**
+
 - New user registration with complete data entry
 - Email and password-based login
 - Automatic name display throughout application
@@ -225,33 +251,39 @@ Administrative interface for system management and monitoring.
 **Interactive Dashboard:**
 
 **Header Section:**
+
 - User avatar with initials
 - Personalized greeting with first name
 - Notification bell with badge counter
 
 **Statistics Card:**
+
 - Current point balance with attractive design
 - Monthly target progress bar (kg waste)
 - Achievement percentage display (example: 68% of 15kg)
 - User level indicator (Eco Rookie, Green Warrior, Planet Guardian, Champion)
 
 **Quick Access:**
+
 - Deposit Waste: Direct access to deposit page
 - Redeem Points: Access to reward catalog
 - Gradient-styled action cards
 
 **Educational Carousel:**
+
 - Horizontal scrolling banner with recycling tips
 - Short articles about environmental benefits
 - Auto-scroll with dot indicators
 
 **Recent Activity:**
+
 - Last 4 transactions (deposits and redemptions)
 - Distinct icons for deposits and redemptions
 - Details: item name, weight/quantity, points, timestamp
 - "View All" button redirecting to History page
 
 **User Flow:**
+
 - Login redirects to home with immediate point balance display
 - Quick access to core features without complex navigation
 - Real-time activity monitoring
@@ -261,25 +293,30 @@ Administrative interface for system management and monitoring.
 **Flexible Deposit System with Automatic Calculation:**
 
 **Input Fields:**
+
 - Waste type selection (4 categories: Plastic, Paper, Metal, Glass)
 - Weight input in kilograms
 - Automatic point calculation based on rate per kg
 
 **Rate Structure:**
+
 - Plastic: 100 points/kg
 - Paper: 50 points/kg
 - Metal: 120 points/kg
 - Glass: 90 points/kg
 
 **Validation:**
+
 - Minimum weight: greater than 0 kg
 - Maximum weight: 1000 kg per transaction
 - Numeric input validation
 
 **Real-time Updates:**
+
 - Immediate update of total kg and user points
 
 **User Flow:**
+
 - Select waste type
 - Enter weight
 - System validates input
@@ -291,6 +328,7 @@ Administrative interface for system management and monitoring.
 **Comprehensive Reward Catalog with Product Images:**
 
 **Hero Card Display:**
+
 - Trophy icon
 - Current user point balance
 - Attractive gradient design
@@ -299,30 +337,37 @@ Administrative interface for system management and monitoring.
 Six reward products with original images:
 
 1. **Campus Coffee Voucher** (450 points)
+
    - Description: One cup of coffee from campus cafe
 
 2. **Exclusive Tumbler** (520 points)
+
    - Description: Stainless steel tumbler for drinking water
 
 3. **RePoints ToteBag** (380 points)
+
    - Description: Eco-friendly shopping bag
 
 4. **Gorong Minimarket Voucher** (600 points)
+
    - Description: Rp 50,000 shopping voucher
 
 5. **Gorong Print Voucher** (300 points)
+
    - Description: Free 100-page printing
 
 6. **RePoints T-Shirt** (750 points)
    - Description: Exclusive branded t-shirt
 
 **Product Card Features:**
+
 - HD product images from `asset/Katalog_reward/`
 - Point badge with color variation
 - Category icons
 - Status indicators (Sufficient/Insufficient Points)
 
 **Detail and Confirmation:**
+
 - Large product image (200x200)
 - Complete name and description
 - Required points
@@ -331,6 +376,7 @@ Six reward products with original images:
 - Confirmation dialog before redemption
 
 **Success Page:**
+
 - Success animation with confirmation image
 - Redeemed reward details
 - Collection instructions with redemption code, location, and validity period
@@ -341,15 +387,18 @@ Six reward products with original images:
 **Learning Platform for Recycling and Environment:**
 
 **Tab Navigation:**
+
 - Articles
 - Video Tutorials
 - Tips and Tricks
 
 **Search Functionality:**
+
 - Real-time search by title and keywords
 - Search icon with placeholder text
 
 **Filter Options:**
+
 - Favorites Only
 - Recycling
 - Environment
@@ -358,6 +407,7 @@ Six reward products with original images:
 - Community
 
 **Article Cards:**
+
 - Thumbnail image
 - Category-specific icon with color coding
 - Bold article title
@@ -366,6 +416,7 @@ Six reward products with original images:
 - Status indicators: read status, favorite status
 
 **Article Details:**
+
 - Full-width cover image
 - Large, clear title
 - Author and date
@@ -374,6 +425,7 @@ Six reward products with original images:
 - Favorite and share buttons
 
 **Tracking and Engagement:**
+
 - Auto-mark as read on scroll completion
 - Total articles read counter
 - Bookmark for later reading
@@ -389,8 +441,9 @@ Sorted from newest to oldest transactions
 **Transaction Types:**
 
 1. **Waste Deposit (Positive Points)**
+
    - Title: "Deposit [Waste Type]"
-   - Detail: "[Weight] kg  [Points] points"
+   - Detail: "[Weight] kg [Points] points"
    - Timestamp: "Today, 08:40" / "Yesterday, 17:05" / "3 Days ago"
    - Color: Green #4CAF50
 
@@ -401,6 +454,7 @@ Sorted from newest to oldest transactions
    - Color: Orange #FF9800
 
 **Entry Information:**
+
 - Circle icon with transaction type
 - Bold transaction title
 - Specific details
@@ -408,11 +462,13 @@ Sorted from newest to oldest transactions
 - Point delta with sign
 
 **Filtering and Sorting (Future):**
+
 - Filter by type (deposits only / redemptions only / all)
 - Filter by date range
 - Transaction search
 
 **Layout:**
+
 - Bottom padding (70px) to prevent overlap with navigation
 
 #### 7. User Profile
@@ -420,12 +476,14 @@ Sorted from newest to oldest transactions
 **Personal Data and Statistics Management:**
 
 **Personal Information:**
+
 - Full name
 - Email address
 - Phone number
 - Profile photo or initial-based avatar
 
 **Academic Information:**
+
 - University: Institut Teknologi PLN
 - Faculty
 - Department/Study Program
@@ -433,16 +491,19 @@ Sorted from newest to oldest transactions
 - Registration date
 
 **Statistics:**
+
 - Total points balance
 - Total waste deposited (kg)
 - User level/badge
 
 **Profile Editing:**
+
 - Editable fields: all except NIM and registration date
 - Input validation
 - Save confirmation
 
 **Action Buttons:**
+
 - Edit profile
 - Application settings (future implementation)
 - Logout (future implementation)
@@ -525,15 +586,18 @@ Application uses **AppState Singleton Pattern** for centralized state management
 Singleton class extending `ChangeNotifier` for centralized state management:
 
 **User Data:**
+
 - `_allUsers`: Complete user registry
 - `_allTransactions`: All transactions (deposits and redemptions)
 - `_allNotifications`: User notifications queue
 
 **Catalog Data:**
+
 - `_rewards`: Reward catalog with stock management
 - `_edukasiItems`: Educational content library
 
 **CRUD Methods:**
+
 - User operations: `registerUser()`, `getUserById()`, `updateUser()`
 - Transaction operations: `addTransaction()`, `getTransactionsByUserId()`
 - Reward operations: `addReward()`, `updateReward()`, `deleteReward()`, `checkAndReduceStock()`
@@ -544,6 +608,7 @@ Singleton class extending `ChangeNotifier` for centralized state management:
 Auto-initialized with 8 users, 10 transactions, 6 rewards, and 6 articles for demonstration purposes.
 
 **Local State:**
+
 - `RePointShell`: User interface state (5-tab navigation)
 - `AdminShell`: Admin interface state (5-tab navigation)
 
@@ -733,14 +798,14 @@ if (userPoints >= rewardCost) {
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.8     # iOS-style icons
-  google_fonts: ^6.0.0        # Custom font support (Poppins)
-  flutter_svg: ^2.0.10+1      # SVG rendering
+  cupertino_icons: ^1.0.8 # iOS-style icons
+  google_fonts: ^6.0.0 # Custom font support (Poppins)
+  flutter_svg: ^2.0.10+1 # SVG rendering
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^5.0.0       # Linting rules
+  flutter_lints: ^5.0.0 # Linting rules
 ```
 
 **Note:** Admin dashboard uses `dart:html` for CSV export functionality (browser download). This library is deprecated for WASM builds but remains functional for standard web builds.
@@ -837,6 +902,7 @@ flutter build web --release
 ### Phase 1: Backend Integration
 
 **Completed:**
+
 - Authentication UI (login/registration)
 - Admin panel with complete management interface
   - Dashboard with statistics
@@ -847,6 +913,7 @@ flutter build web --release
   - CSV export functionality
 
 **Pending:**
+
 - REST API or Firebase integration
 - JWT token management and secure storage
 - Real-time data synchronization

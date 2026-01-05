@@ -518,12 +518,12 @@ class AppState extends ChangeNotifier {
         fullContent: '''
 Memilah sampah adalah langkah pertama menuju pengelolaan sampah yang baik.
 
-**Jenis-jenis Sampah:**
-1. **Sampah Organik**: Sisa makanan, daun, ranting
-2. **Sampah Anorganik**: Plastik, kertas, logam, kaca
-3. **Sampah B3**: Baterai, lampu, obat-obatan
+Jenis-jenis Sampah:
+1. Sampah Organik: Sisa makanan, daun, ranting
+2. Sampah Anorganik: Plastik, kertas, logam, kaca
+3. Sampah B3: Baterai, lampu, obat-obatan
 
-**Tips Pemilahan:**
+Tips Pemilahan:
 - Siapkan 3 tempat sampah berbeda
 - Cuci plastik dan kaleng sebelum dibuang
 - Pisahkan sampah B3 ke tempat khusus
@@ -544,12 +544,12 @@ Dengan memilah sampah, kita memudahkan proses daur ulang dan mengurangi pencemar
         fullContent: '''
 Plastik sekali pakai menjadi masalah serius bagi lingkungan.
 
-**Fakta Plastik:**
+Fakta Plastik:
 - 8 juta ton plastik masuk ke laut setiap tahun
 - Plastik membutuhkan 500+ tahun untuk terurai
 - 90% burung laut memiliki plastik di perutnya
 
-**Solusi:**
+Solusi:
 1. Gunakan tas belanja kain
 2. Bawa tumbler sendiri
 3. Tolak sedotan plastik
@@ -570,7 +570,7 @@ Mari beralih ke gaya hidup zero waste untuk bumi yang lebih bersih!
         fullContent: '''
 Mengurangi sampah dimulai dari rumah!
 
-**10 Tips Zero Waste:**
+10 Tips Zero Waste:
 1. Bawa tas belanja sendiri
 2. Gunakan botol minum isi ulang
 3. Kompos sampah dapur
@@ -597,19 +597,19 @@ Setiap langkah kecil berdampak besar untuk bumi!
         fullContent: '''
 Teknologi pirolisis membuka harapan baru untuk masalah sampah plastik.
 
-**Apa itu Pirolisis?**
+Apa itu Pirolisis?
 Proses pemanasan plastik tanpa oksigen pada suhu 300-500°C untuk menghasilkan:
 - Minyak mentah (40-80%)
 - Gas (10-20%)
 - Residu karbon (10-30%)
 
-**Keunggulan:**
+Keunggulan:
 ✓ Mengurangi volume sampah plastik
 ✓ Menghasilkan energi alternatif
 ✓ Mengurangi ketergantungan BBM fosil
 ✓ Ramah lingkungan
 
-**Tantangan:**
+Tantangan:
 - Biaya investasi tinggi
 - Perlu pemilahan plastik berkualitas
 - Belum tersedia massal
@@ -629,16 +629,16 @@ Indonesia perlu mengembangkan teknologi ini untuk solusi sampah plastik.
         fullContent: '''
 Bank Sampah kampus mengajak mahasiswa menabung sambah untuk lingkungan bersih.
 
-**Apa itu Bank Sampah?**
+Apa itu Bank Sampah?
 Sistem pengelolaan sampah dengan konsep menabung - sampah anorganik dikumpulkan, dipilah, dan dijual ke pengepul.
 
-**Manfaat:**
+Manfaat:
 💚 Mengurangi sampah di TPA
 💰 Dapat penghasilan tambahan
 🌍 Membantu pelestarian lingkungan
 👥 Membangun komunitas peduli
 
-**Cara Bergabung:**
+Cara Bergabung:
 1. Daftar sebagai nasabah
 2. Kumpulkan sampah anorganik di rumah
 3. Bawa ke bank sampah saat jadwal setor
@@ -660,30 +660,30 @@ Yuk ikut aksi nyata untuk kampus hijau!
         fullContent: '''
 Botol plastik bekas bisa disulap jadi barang berguna!
 
-**5 Kreasi Mudah:**
+5 Kreasi Mudah:
 
-1. **Pot Tanaman Gantung**
+1. Pot Tanaman Gantung
    - Potong botol setengah
    - Lubangi untuk drainage
    - Hiasi dengan cat/tali
    - Gantung di teras
 
-2. **Tempat Pensil**
+2. Tempat Pensil
    - Potong bagian bawah botol
    - Hiasi dengan kertas/cat
    - Simpan alat tulis
 
-3. **Celengan**
+3. Celengan
    - Buat celah di tutup botol
    - Cat dengan warna cerah
    - Tambahkan dekorasi
 
-4. **Penyiram Tanaman**
+4. Penyiram Tanaman
    - Lubangi tutup botol
    - Isi air
    - Semprot tanaman
 
-5. **Organizer Kabel**
+5. Organizer Kabel
    - Potong botol jadi cincin
    - Gulung kabel di dalamnya
    - Rapih dan mudah disimpan
