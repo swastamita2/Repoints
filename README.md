@@ -69,24 +69,29 @@ RePoints menerapkan model **Circular Economy** dengan sistem poin:
 
 #### 1. 📊 Dashboard
 
-- **Statistik Real-time:**
-  - Total users (breakdown: Mahasiswa, Dosen, Staff)
-  - Total kg sampah terkumpul
-  - Total poin terdistribusi
-  - Transaksi hari ini
-- **Charts & Visualisasi:**
-  - User breakdown by role (pie chart representation)
-  - Deposit breakdown by type (Plastik, Kertas, Logam, Kaca)
-- **Quick Actions:**
-  - View Users
-  - Manage Rewards
-  - Export Laporan
-- **Export Feature:**
-  - Laporan Transaksi (CSV)
-  - Laporan Pengguna (CSV)
-  - Laporan Sampah per Jenis (CSV)
-  - UTF-8 encoding dengan BOM
-  - Auto-download via browser
+**Header dengan Export Button:**
+- Welcome card dengan greeting admin
+- **Export button** (prominent, di header sebelah kanan)
+- Langsung akses dialog export tanpa scroll
+
+**Statistik Real-time:**
+- Total users (breakdown: Mahasiswa, Dosen, Staff)
+- Total kg sampah terkumpul
+- Total poin terdistribusi
+- Transaksi hari ini
+
+**Charts & Visualisasi:**
+- User breakdown by role (visual representation)
+- Deposit breakdown by type (Plastik, Kertas, Logam, Kaca)
+- Progress bars dengan persentase
+
+**Export Feature:**
+- Laporan Transaksi (CSV)
+- Laporan Pengguna (CSV)
+- Laporan Sampah per Jenis (CSV)
+- UTF-8 encoding dengan BOM
+- Auto-download via browser
+- Dialog dengan 3 pilihan report type
 
 #### 2. 👥 Users Management
 
@@ -142,34 +147,44 @@ RePoints menerapkan model **Circular Economy** dengan sistem poin:
   - Stock warning indicators
   - Prevent redemption when out of stock
 
-#### 5. 📚 Edukasi Management (New!)
+#### 5. 📚 Edukasi Management
 
-- **Content List:**
-  - All education articles
-  - Display: Icon, Title, Description, Category, Read time
-  - Article counter badge
-- **Filter by Category:**
-  - All
-  - Daur Ulang
-  - Lingkungan
-  - Tips & Trik
-  - Inovasi
-  - Komunitas
-- **CRUD Operations:**
-  - ➕ Add new article
-  - ✏️ Edit existing article
-  - 🗑️ Delete article
-- **Form Fields:**
-  - Title (judul artikel)
-  - Description (deskripsi singkat)
-  - Full Content (konten lengkap, multiline)
-  - Category (dropdown enum)
-  - Read Minutes (waktu baca estimasi)
-- **Content Display:**
-  - Card view with category color coding
-  - Icon per category
-  - Read time indicator
-  - Three-dot menu (edit/delete)
+**Search Functionality:**
+- Real-time search bar (judul, deskripsi, tags)
+- Clear button when typing
+- Counter update: "X dari Y artikel"
+- Kombinasi dengan filter kategori
+
+**Content List:**
+- All education articles
+- Display: Icon, Title, Description, Category, Read time
+- Article counter badge
+
+**Filter by Category:**
+- All
+- Daur Ulang
+- Lingkungan
+- Tips & Trik
+- Inovasi
+- Komunitas
+
+**CRUD Operations:**
+- ➕ Add new article
+- ✏️ Edit existing article
+- 🗑️ Delete article
+
+**Form Fields:**
+- Title (judul artikel)
+- Description (deskripsi singkat)
+- Full Content (konten lengkap, multiline)
+- Category (dropdown enum)
+- Read Minutes (waktu baca estimasi)
+
+**Content Display:**
+- Card view with category color coding
+- Icon per category
+- Read time indicator
+- Three-dot menu (edit/delete)
 
 **Admin Features:**
 
